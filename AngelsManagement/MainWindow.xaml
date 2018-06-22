@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Anioły Wiedzy - Osoby" Height="732.393" Width="924.944">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="792" Background="White">
-            <MenuItem Header="Dodaj osobę" />
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="792" Background="White">
+            <MenuItem Header="Dodaj osobę" Click="OnAddPersonButtonClick" />
             <MenuItem Header="Opcje">
                 <DockPanel>
                     <TextBlock>Opcja 1?</TextBlock>
@@ -20,48 +20,22 @@
 
         <TabControl TabStripPlacement="Top" Margin="0,30,9.6,0" RenderTransformOrigin="0.467,0.501">
             <TabItem Header="Wolontariusze">
-                <Grid Background="#FFE5E5E5">
-                    <TabControl TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
-                        <TabItem Header="Gdańsk">
-                            <Grid Background="#ffffff">
-                                <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="371,10,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-                                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="21" Margin="98,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="709"/>
-                                <DataGrid x:Name="VolunteersDataGridGda" ItemsSource="{Binding}" IsReadOnly="True"
-                                          HorizontalAlignment="Left" Height="480" Margin="31,102,0,0" VerticalAlignment="Top" Width="825">
-                                   
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Wrocław">
-                            <Grid Background="#ffffff"/>
-                        </TabItem>
-                        <TabItem Header="Poznań">
-                            <Grid Background="#ffffff">
-                                <DataGrid x:Name="VolunteersDataGrid" HorizontalAlignment="Left" Height="577" Margin="10,10,0,0" VerticalAlignment="Top" Width="851">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Imię"  />
-                                        <DataGridTextColumn Header="Nazwisko"  />
-                                        <DataGridHyperlinkColumn Header="Rok urodzenia" />
-                                        <DataGridComboBoxColumn Header="Adres"   />
-                                        <DataGridComboBoxColumn Header="Telefon"   />
-                                    </DataGrid.Columns>
-
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
+                <Grid Background="#ffffff">
+                    <TabControl x:Name="VolunteersTabControl" TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
+                       
                     </TabControl>
                 </Grid>
 
             </TabItem>
             <TabItem Header="Podopieczni">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#ffffff">
                     <TabControl x:Name="StudentsTabControl" TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
                         
                     </TabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Rodzice">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#ffffff">
                     <TabControl x:Name="ParentsTabControl" TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
                         
                     </TabControl>

@@ -11,5 +11,7 @@ namespace AngelsManagement.DataModels
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public Int64 BirthYear { get; set; }
+
+        public String City { get; set; }
     }
 }
