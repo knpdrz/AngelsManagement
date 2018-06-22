@@ -140,6 +140,7 @@ namespace AngelsManagement
                     {
                         while (reader.Read())
                         {
+                            Int64 id = (Int64)reader["ID"];
                             string fName = (string)reader["first_name"];
                             string lName = (string)reader["last_name"];
                             Int64 bYear = (Int64)reader["birth_year"];
@@ -148,6 +149,7 @@ namespace AngelsManagement
 
                             volunteers.Add(new Volunteer
                             {
+                                ID = id,
                                 FirstName = fName,
                                 LastName = lName,
                                 BirthYear = bYear,
@@ -183,6 +185,7 @@ namespace AngelsManagement
                     {
                         while (reader.Read())
                         {
+                            Int64 id = (Int64)reader["ID"];
                             string fName = (string)reader["first_name"];
                             string lName = (string)reader["last_name"];
                             Int64 bYear = (Int64)reader["birth_year"];
@@ -190,6 +193,7 @@ namespace AngelsManagement
 
                             students.Add(new Student
                             {
+                                ID = id,
                                 FirstName = fName,
                                 LastName = lName,
                                 BirthYear = bYear,

@@ -1,4 +1,5 @@
 ﻿using AngelsManagement.DataModels;
+using AngelsManagement.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ namespace AngelsManagement
             //manage parents tab        
         }
 
-            private void InitializeVolunteersTab()
+        private void InitializeVolunteersTab()
         {
             TabItem tabItem;
             DataGrid dataGrid;
@@ -71,14 +72,29 @@ namespace AngelsManagement
                 dataGrid.IsReadOnly = true;
                 dataGrid.ItemsSource = cityCollection.Value;
 
+                //adding double-click event to volunteers datagrid
+                //if user double clicks a row, VolunteerRow_DoubleClick will be called
+                Style rowStyle = new Style(typeof(DataGridRow));
+                rowStyle.Setters.Add(new EventSetter(DataGridRow.MouseDoubleClickEvent,
+                                         new MouseButtonEventHandler(VolunteerRow_DoubleClick)));
+                dataGrid.RowStyle = rowStyle;
+
                 //attach that datagrid to its city tab
                 tabItem.Content = dataGrid;
             }
-
-
-
         }
-        
+
+        private void VolunteerRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Volunteer doubleClickedVolunteer = (Volunteer)row.Item;
+
+            //showing details of doubleclicked volunteer
+            VolunteerDetailsWindow volunteerDetailsWindow = 
+                new VolunteerDetailsWindow(dataManager, doubleClickedVolunteer);
+            volunteerDetailsWindow.Show();
+        }
+
         private void InitializeStudentsTab()
         {
             TabItem tabItem;
@@ -101,7 +117,7 @@ namespace AngelsManagement
                 dataGrid = new DataGrid();
                 dataGrid.IsReadOnly = true;
                 dataGrid.ItemsSource = cityCollection.Value;
-
+               
                 //attach that datagrid to its city tab
                 tabItem.Content = dataGrid;
             }

@@ -27,9 +27,7 @@ namespace AngelsManagement
         public DataManager()
         {
             dbManager = new DbManager();
-
-
-          
+            
             PrepareDictionaries();
 
             GetAllData();
@@ -85,14 +83,12 @@ namespace AngelsManagement
                 //--------------volunteers
                 //get a list of all volunteers from city
                 vList = dbManager.GetVolunteersByCity(city);
-
                 
                 //add them to the collection
                 vCollection = VolunteersDict[city];
 
                 //clear collection //todo this is very ugly
                 vCollection.Clear();
-
 
                 foreach (Volunteer volunteer in vList)
                 {
