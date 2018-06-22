@@ -7,16 +7,15 @@
         mc:Ignorable="d"
         Title="Anioły Wiedzy - Osoby" Height="732.393" Width="924.944">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="792" Background="White">
-            <MenuItem Header="Dodaj osobę" Click="OnAddPersonButtonClick" />
-            <MenuItem Header="Opcje">
-                <DockPanel>
-                    <TextBlock>Opcja 1?</TextBlock>
-                    <TextBlock Width="10"></TextBlock>
-                    <TextBlock HorizontalAlignment="Right">F2</TextBlock>
-                </DockPanel>
-            </MenuItem>
-        </Menu>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Dodaj osobę">
+                    <MenuItem Header="Dodaj wolontariusza" Click="OnAddVolunteerButtonClick"/>
+                    <MenuItem Header="Dodaj podopiecznego" Click="OnAddStudentButtonClick"/>
+                    <MenuItem Header="Dodaj rodzica"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
 
         <TabControl TabStripPlacement="Top" Margin="0,30,9.6,0" RenderTransformOrigin="0.467,0.501">
             <TabItem Header="Wolontariusze">

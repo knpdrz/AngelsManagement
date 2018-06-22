@@ -74,7 +74,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddPersonWindow.xaml">
+    <Page Include="AddStudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddVolunteerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,14 +86,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddPersonWindow.xaml.cs">
-      <DependentUpon>AddPersonWindow.xaml</DependentUpon>
+    <Compile Include="AddStudentWindow.xaml.cs">
+      <DependentUpon>AddStudentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddVolunteerWindow.xaml.cs">
+      <DependentUpon>AddVolunteerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataManager.cs" />
+    <Compile Include="DataModels\Parent.cs" />
+    <Compile Include="DataModels\Student.cs" />
     <Compile Include="DataModels\Volunteer.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="Globals.cs" />

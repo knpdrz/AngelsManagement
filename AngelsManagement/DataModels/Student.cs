@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace AngelsManagement.DataModels
 {
-    public class Volunteer
+    public class Student
     {
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public Int64 BirthYear { get; set; }
         public String City { get; set; }
-        public String Address { get; set; }
-        public String Email { get; set; }
+        public String School { get; set; }
     }
 }

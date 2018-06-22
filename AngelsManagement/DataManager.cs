@@ -11,10 +11,7 @@ namespace AngelsManagement
     public class DataManager
     {
         private DbManager dbManager;
-        //todo delete if unused public ObservableCollection<Volunteer> Volunteers { get; set; }
-        /*  public ObservableCollection<Student> Students { get; set; }
-          public ObservableCollection<Parent> Parents { get; set; }
-          */
+
 
         private String[] cities = { "Gdansk", "Wroclaw", "Poznan" };
         //todo- this is for the future (keep a map city-{volo,stud,par}?)
@@ -23,17 +20,16 @@ namespace AngelsManagement
         //todo enum not string for city
         //dictionary of volunteers in form <city, volunteers list>
         public Dictionary<String, ObservableCollection<Volunteer>> VolunteersDict { get; set; }
-       /* Dictionary<String, ObservableCollection<Student>> StudentsDict;
+        public Dictionary<String, ObservableCollection<Student>> StudentsDict { get; set; }
+        /*
         Dictionary<String, ObservableCollection<Parent>> ParentsDict;*///todo
 
         public DataManager()
         {
             dbManager = new DbManager();
 
-            VolunteersDict = new Dictionary<string, ObservableCollection<Volunteer>>();//todo two more
 
-            /*Students = new ObservableCollection<Student>();
-            Parents = new ObservableCollection<Parent>();*/
+          
             PrepareDictionaries();
 
             GetAllData();
@@ -45,6 +41,9 @@ namespace AngelsManagement
         //this is to ensure that while setting data sources app doesn't crash
         private void PrepareDictionaries()
         {
+            //volunteers dict
+            VolunteersDict = new Dictionary<string, ObservableCollection<Volunteer>>();
+
             ObservableCollection<Volunteer> vCollection;
             foreach (string city in cities)
             {
@@ -52,6 +51,19 @@ namespace AngelsManagement
                 VolunteersDict.Add(city, vCollection);
 
             }
+
+            //students dict
+            StudentsDict = new Dictionary<string, ObservableCollection<Student>>();
+
+            ObservableCollection<Student> sCollection;
+            foreach (string city in cities)
+            {
+                sCollection = new ObservableCollection<Student>();
+                StudentsDict.Add(city, sCollection);
+
+            }
+
+            //todo parents
         }
 
         //prepares the database (app directory, file, tables)
@@ -65,9 +77,12 @@ namespace AngelsManagement
             List<Volunteer> vList;
             ObservableCollection<Volunteer> vCollection;
 
-            Console.WriteLine("---getting volunteers by city");
+            List<Student> sList;
+            ObservableCollection<Student> sCollection;
+
             foreach (string city in cities)
             {
+                //--------------volunteers
                 //get a list of all volunteers from city
                 vList = dbManager.GetVolunteersByCity(city);
 
@@ -85,16 +100,31 @@ namespace AngelsManagement
                 }
 
                 VolunteersDict[city]= vCollection;
-                Console.WriteLine(">>" + city + " : " +vCollection.Count());
 
-            }//todo same for stud and parents
-            Console.WriteLine("-----got volos----");
+                //--------------students
+                sList = dbManager.GetStudentsByCity(city);
+                sCollection = StudentsDict[city];
+                sCollection.Clear();
+
+                foreach (Student student in sList)
+                {
+                    sCollection.Add(student);
+                }
+
+                StudentsDict[city] = sCollection;
+
+            }//todo same for parents
             
         }
 
         public void CreateVolunteer(Volunteer volunteer)
         {
             dbManager.InsertIntoVolunteers(volunteer);
+            GetAllData();
+        }
+        public void CreateStudent(Student student)
+        {
+            dbManager.InsertIntoStudents(student);
             GetAllData();
         }
     }

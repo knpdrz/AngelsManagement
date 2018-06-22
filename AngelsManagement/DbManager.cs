@@ -15,6 +15,8 @@ namespace AngelsManagement
         private static string volunteersTableName = "Volunteers";
         private static string studentsTableName = "Students";
         private static string parentsTableName = "Parents";
+        private static string volStudTableName = "VolStud";
+        private static string studParTableName = "StudPar";
 
         //creates app data directory, db file and db tables if they don't exist
         //tables for:
@@ -33,36 +35,56 @@ namespace AngelsManagement
                 SQLiteConnection.CreateFile(dbFilePath);
             }
 
-            string createVolunteersTableQuery = @"CREATE TABLE IF NOT EXISTS "
-                                        + volunteersTableName
-                                        + @"(
-                                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                        [first_name] varchar(255) NULL,
-                                        [last_name] varchar(255) NULL,
-                                        [birth_year] INTEGER NULL,
-                                        [city] varchar(255) NOT NULL
-                                         )";
+            string createVolStudTableCmd = @"CREATE TABLE IF NOT EXISTS "
+                        + volStudTableName
+                        + @"(
+                        [vol_id] INTEGER NOT NULL,
+                        [stud_id] INTEGER NOT NULL,
+                        CONSTRAINT [id] PRIMARY KEY (vol_id, stud_id),
+                        FOREIGN KEY (vol_id) REFERENCES "+ volunteersTableName +
+                        " (ID), FOREIGN KEY (stud_id) REFERENCES " + studentsTableName +
+                        "(ID)"+
+                        ")";
 
-            string createStudentsTableQuery = @"CREATE TABLE IF NOT EXISTS "
-                                        + volunteersTableName
-                                        + @"(
-                                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                        [first_name] varchar(255) NULL,
-                                        [last_name] varchar(255) NULL,
-                                        [school_name] varchar(1024) NULL,
-                                        [birth_year] INTEGER NULL,
-                                        [city] varchar(255) NOT NULL
-                                         )";
+            //todo if changes in classes- here too
+            string createVolunteersTableCmd = @"CREATE TABLE IF NOT EXISTS "
+                        + volunteersTableName
+                        + @"(
+                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        [first_name] varchar(255) NULL,
+                        [last_name] varchar(255) NULL,
+                        [birth_year] INTEGER NULL,
+                        [city] varchar(255) NOT NULL,
+                        [address] varchar(1024) NULL,
+                        [email] varchar(1024) NULL)";/*,
+                        FOREIGN KEY(v_s_id) REFERENCES(" + volStudTableName + 
+                        ")";*/
 
-            string createParentsTableQuery = @"CREATE TABLE IF NOT EXISTS "
-                                        + volunteersTableName
-                                        + @"(
-                                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                        [first_name] varchar(255) NULL,
-                                        [last_name] varchar(255) NULL,
-                                        [birth_year] INTEGER NULL,
-                                        [city] varchar(255) NOT NULL
-                                         )";
+
+            string createStudentsTableCmd = @"CREATE TABLE IF NOT EXISTS "
+                        + studentsTableName
+                        + @"(
+                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        [first_name] varchar(255) NULL,
+                        [last_name] varchar(255) NULL,
+                        [school] varchar(1024) NULL,
+                        [birth_year] INTEGER NULL,
+                        [city] varchar(255) NOT NULL)";/*
+                        FOREIGN KEY(v_s_id) REFERENCES (" + volStudTableName +"), " +
+                        "FOREIGN KEY(s_p_id) REFERENCES (" + studParTableName +
+                        ")";*/
+
+            string createParentsTableCmd = @"CREATE TABLE IF NOT EXISTS "
+                        + parentsTableName
+                        + @"(
+                        [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        [first_name] varchar(255) NULL,
+                        [last_name] varchar(255) NULL,
+                        [birth_year] INTEGER NULL,
+                        [city] varchar(255) NOT NULL)";/*
+                        FOREIGN KEY(s_p_id) REFERENCES(" 
+                        + studParTableName +
+                            ")";*/
 
             //TODO- many to many- missing vs and sp
             //connect to the db
@@ -74,16 +96,23 @@ namespace AngelsManagement
 
                     //create all needed tables if they don't exist
                     //volunteers
-                    cmd.CommandText = createVolunteersTableQuery;
+                    cmd.CommandText = createVolunteersTableCmd;
                     cmd.ExecuteNonQuery();
 
                     //students
-                    cmd.CommandText = createVolunteersTableQuery;
+                    cmd.CommandText = createStudentsTableCmd;
                     cmd.ExecuteNonQuery();
 
                     //parents
-                    cmd.CommandText = createVolunteersTableQuery;
+                    cmd.CommandText = createParentsTableCmd;
                     cmd.ExecuteNonQuery();
+
+                    //table expressing many-to-many relationship
+                    //between volunteer and student
+                    cmd.CommandText = createVolStudTableCmd;
+                    cmd.ExecuteNonQuery();
+
+                    //todo- same with student-parent
 
                     conn.Close(); // Close the connection to the database
                 }
@@ -104,7 +133,6 @@ namespace AngelsManagement
                     string selectQueryText = "SELECT * FROM " + volunteersTableName
                         + " WHERE city='" + city + "'";
 
-                    Console.WriteLine("querying " + selectQueryText);
                     // get matching db entries
                     cmd.CommandText = selectQueryText;
 
@@ -115,14 +143,17 @@ namespace AngelsManagement
                             string fName = (string)reader["first_name"];
                             string lName = (string)reader["last_name"];
                             Int64 bYear = (Int64)reader["birth_year"];
-
+                            string address = (string)reader["address"];
+                            string email = (string)reader["email"];
 
                             volunteers.Add(new Volunteer
                             {
                                 FirstName = fName,
                                 LastName = lName,
                                 BirthYear = bYear,
-                                City = city
+                                City = city,
+                                Address = address,
+                                Email = email
                             });
                         }
                     }
@@ -133,18 +164,71 @@ namespace AngelsManagement
             return volunteers;
         }
 
+        public List<Student> GetStudentsByCity(string city)
+        {
+            List<Student> students = new List<Student>();
+            //connect to the db
+            using (var conn = new SQLiteConnection(connectionString))
+            {
+                using (var cmd = new SQLiteCommand(conn))
+                {
+                    conn.Open();
+                    string selectQueryText = "SELECT * FROM " + studentsTableName
+                        + " WHERE city='" + city + "'";
+
+                    // get matching db entries
+                    cmd.CommandText = selectQueryText;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string fName = (string)reader["first_name"];
+                            string lName = (string)reader["last_name"];
+                            Int64 bYear = (Int64)reader["birth_year"];
+                            string school = (string)reader["school"];
+
+                            students.Add(new Student
+                            {
+                                FirstName = fName,
+                                LastName = lName,
+                                BirthYear = bYear,
+                                City = city,
+                                School = school
+                            });
+                        }
+                    }
+                    conn.Close(); // Close the connection to the database
+                }
+            }
+
+            return students;
+        }
+
         public void InsertIntoVolunteers(Volunteer v)//todo city as enum
         {
-
             string insertCmdText = "INSERT INTO " + volunteersTableName
-                       + " (first_name, last_name, birth_year, city) VALUES ("
+                       + " (first_name, last_name, birth_year, city, address, email) VALUES ("
                        + "'" + v.FirstName + "', "
                        + "'" + v.LastName + "', "
                        + v.BirthYear + ", "
-                       + "'" + v.City + "'"
+                       + "'" + v.City + "',"
+                       + "'" + v.Address + "',"
+                       + "'" + v.Email + "'"
                        + ")";
 
-            Console.WriteLine("inserting " + insertCmdText);
+            ExecuteNonQuery(insertCmdText);
+        }
+         public void InsertIntoStudents(Student s)//todo city as enum
+        {
+            string insertCmdText = "INSERT INTO " + studentsTableName
+                       + " (first_name, last_name, birth_year, city, school) VALUES ("
+                       + "'" + s.FirstName + "', "
+                       + "'" + s.LastName + "', "
+                       + s.BirthYear + ", "
+                       + "'" + s.City + "',"
+                       + "'" + s.School + "'"
+                       + ")";
 
             ExecuteNonQuery(insertCmdText);
         }

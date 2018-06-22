@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace AngelsManagement
 {
     /// <summary>
-    /// Interaction logic for AddPerson.xaml
+    /// Interaction logic for AddVolunteerWindow.xaml
     /// </summary>
-    public partial class AddPersonWindow : Window
+    public partial class AddVolunteerWindow : Window
     {
         private DataManager dataManager;
-        public AddPersonWindow(DataManager dataManager)
+        public AddVolunteerWindow(DataManager dataManager)
         {
             InitializeComponent();
             this.dataManager = dataManager;
         }
 
-        private void AddPersonButton_Click(object sender, RoutedEventArgs e)
+        private void AddVolunteerButton_Click(object sender, RoutedEventArgs e)
         {
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
@@ -46,13 +46,13 @@ namespace AngelsManagement
                     City = city
                 };
 
-                AddPerson(volunteer);
+                AddVolunteer(volunteer);
                 Close();
             }
             
         }
 
-        private void AddPerson(Volunteer volunteer)
+        private void AddVolunteer(Volunteer volunteer)
         {
             dataManager.CreateVolunteer(volunteer);
         }

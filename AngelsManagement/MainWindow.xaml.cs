@@ -43,6 +43,13 @@ namespace AngelsManagement
 
         private void InitializeTabs()
         {
+            InitializeVolunteersTab();
+            InitializeStudentsTab();
+            //manage parents tab        
+        }
+
+            private void InitializeVolunteersTab()
+        {
             TabItem tabItem;
             DataGrid dataGrid;
 
@@ -67,29 +74,50 @@ namespace AngelsManagement
                 //attach that datagrid to its city tab
                 tabItem.Content = dataGrid;
             }
-            /*todo it was previously here- now unused
-            TabItem VolunteersTab1 = new TabItem();
-            VolunteersTab1.Header = "Gdańsk";
-
-            DataGrid VolunteersTab1DataGrid = new DataGrid();
-            VolunteersTab1DataGrid.ItemsSource = Volunteers;
-            VolunteersTab1DataGrid.IsReadOnly = true;
-            VolunteersTabControl.Items.Add(tabItem);
 
 
-            VolunteersTab1.Content = VolunteersTab1DataGrid;*/
-
-            //manage students tab
-            //todo same as above
-            //manage parents tab
 
         }
         
-
-        private void OnAddPersonButtonClick(object sender, RoutedEventArgs e)
+        private void InitializeStudentsTab()
         {
-            AddPersonWindow addPersonWindow = new AddPersonWindow(dataManager);
-            addPersonWindow.Show();
+            TabItem tabItem;
+            DataGrid dataGrid;
+
+            //manage students tab (called StudentsTabControl, has tabs with all cities)
+            Dictionary<String, ObservableCollection<Student>> studentsDict =
+                dataManager.StudentsDict;
+
+            foreach (KeyValuePair<String, ObservableCollection<Student>> cityCollection in studentsDict)
+            {
+                //for each city create a TabItem
+                tabItem = new TabItem();
+                tabItem.Header = cityCollection.Key;
+
+                //add that tab item to students TabControl 
+                StudentsTabControl.Items.Add(tabItem);
+
+                //create DataGrid for students from that particular city
+                dataGrid = new DataGrid();
+                dataGrid.IsReadOnly = true;
+                dataGrid.ItemsSource = cityCollection.Value;
+
+                //attach that datagrid to its city tab
+                tabItem.Content = dataGrid;
+            }
+        }
+
+
+
+        private void OnAddVolunteerButtonClick(object sender, RoutedEventArgs e)
+        {
+            AddVolunteerWindow addVolunteerWindow = new AddVolunteerWindow(dataManager);
+            addVolunteerWindow.Show();
+        }
+        private void OnAddStudentButtonClick(object sender, RoutedEventArgs e)
+        {
+            AddStudentWindow addStudentWindow = new AddStudentWindow(dataManager);
+            addStudentWindow.Show();
         }
     }
 }
