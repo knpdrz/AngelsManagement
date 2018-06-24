@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngelsManagement.Migrations
 {
     [DbContext(typeof(PeopleContext))]
-    [Migration("20180624163716_initial")]
+    [Migration("20180624180527_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

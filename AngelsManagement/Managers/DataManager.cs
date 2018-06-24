@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace AngelsManagement
 
         public DataManager()
         {
+            //create app data directory (it won't if it already exists)
+            Directory.CreateDirectory(appDataFolderPath);
+
             //perform first migration
             using (PeopleContext context = new PeopleContext())
             {

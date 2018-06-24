@@ -169,9 +169,9 @@
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\TabsManager.cs" />
     <Compile Include="Managers\ValidationManager.cs" />
-    <Compile Include="Migrations\20180624163716_initial.cs" />
-    <Compile Include="Migrations\20180624163716_initial.designer.cs">
-      <DependentUpon>20180624163716_initial.cs</DependentUpon>
+    <Compile Include="Migrations\20180624180527_initial.cs" />
+    <Compile Include="Migrations\20180624180527_initial.designer.cs">
+      <DependentUpon>20180624180527_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PeopleContextModelSnapshot.cs" />
     <Compile Include="Model\PeopleContext.cs" />
