@@ -34,7 +34,7 @@
             </TabItem>
             <TabItem Header="Rodzice">
                 <Grid Background="#ffffff">
-                    <TabControl x:Name="ParentsTabControl" TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
+                    <TabControl x:Name="guardiansTabControl" TabStripPlacement="Bottom" Margin="0,0,9.6,0" RenderTransformOrigin="0.467,0.501">
                         
                     </TabControl>
                 </Grid>

@@ -6,15 +6,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using static AngelsManagement.Globals;
 namespace AngelsManagement
 {
     public class DataManager
     {
-        public String[] Cities = { "Gdansk", "Wroclaw", "Poznan" };
         public Dictionary<String, ObservableCollection<Volunteer>> VolunteersDict { get; set; }
         public Dictionary<String, ObservableCollection<Student>> StudentsDict { get; set; }
-        public Dictionary<String, ObservableCollection<Parent>> ParentsDict { get; set; }
+        public Dictionary<String, ObservableCollection<Guardian>> GuardiansDict { get; set; }
 
         public DataManager()
         {
@@ -32,17 +31,17 @@ namespace AngelsManagement
         {
             VolunteersDict = new Dictionary<string, ObservableCollection<Volunteer>>();
             StudentsDict = new Dictionary<string, ObservableCollection<Student>>();
-            ParentsDict = new Dictionary<string, ObservableCollection<Parent>>();
+            GuardiansDict = new Dictionary<string, ObservableCollection<Guardian>>();
 
         }
 
-        //for each dictionary (volunteers, students, parents)
-        //creates entries <city, list with volunteers/students/parents>
+        //for each dictionary (volunteers, students, guardians)
+        //creates entries <city, list with volunteers/students/guardians>
         private void GetPeopleData()
         {
             List<Volunteer> volunteers;
             List<Student> students;
-            List<Parent> parents;
+            List<Guardian> guardians;
 
             using (var ctx = new PeopleContext())
             {
@@ -93,48 +92,48 @@ namespace AngelsManagement
                     
                 }
 
-                //---------parents
+                //---------guardians
                 foreach (string city in Cities)
                 {
-                    parents = ctx.Parents
+                    guardians = ctx.Guardians
                         .Where(p => p.City.Equals(city)).ToList();
 
-                    if (ParentsDict.ContainsKey(city))
+                    if (GuardiansDict.ContainsKey(city))
                     {
-                        ParentsDict[city].Clear();
+                        GuardiansDict[city].Clear();
                     }
                     else
                     {
-                        ParentsDict[city] = new ObservableCollection<Parent>();
+                        GuardiansDict[city] = new ObservableCollection<Guardian>();
 
                     }
 
-                    foreach (Parent parent in parents)
+                    foreach (Guardian guardian in guardians)
                     {
-                        ParentsDict[city].Add(parent);
+                        GuardiansDict[city].Add(guardian);
                     }
 
                 }
             }
         }
 
-        //todo watch it! both need to have id set already! (id is given upon adding to db)
-        //adds parent to database AND (todo?) adds them to correct student
-        public void AddParentToStudent(Student student, Parent parent)
+        //adds guardian to the database
+        //[IMPORTANT] sets guardian's id field (guardianId) (operations on ctx change guardian variable)
+        //then creates relation between student and guardian
+        //NB: function requires student id field to be set
+        public void AddGuardianToStudent(Student student, Guardian guardian)
         {
             using (var ctx = new PeopleContext())
             {
-                ctx.Parents.Add(parent);
+                ctx.Guardians.Add(guardian);
                 ctx.SaveChanges();
             }
 
-            //adding new parent to observable collection
+            //adding new guardian to observable collection
             //in correct city
-            ParentsDict[parent.City].Add(parent);
+            GuardiansDict[guardian.City].Add(guardian);
 
-            Console.WriteLine("PARENT ID = " + parent.ParentId);
-
-            //adding connection between student and parent
+            //adding connection between student and guardian
             StuPar stuPar;
 
             using (var ctx = new PeopleContext())
@@ -142,7 +141,7 @@ namespace AngelsManagement
                 stuPar = new StuPar
                 {
                     StudentId = student.StudentId,
-                    ParentId = parent.ParentId
+                    GuardianId = guardian.GuardianId
                 };
                 ctx.Add(stuPar);
 
@@ -160,7 +159,6 @@ namespace AngelsManagement
 
             //adding new volunteer to observable collection
             //in correct city
-            //todo- this should be separated in a function?
             VolunteersDict[volunteer.City].Add(volunteer);
 
         }
@@ -202,7 +200,6 @@ namespace AngelsManagement
         }
 
         //returns a list with all students that volunteer doesn't have (as students)
-        //todo differentiation between already added ones..?
         public List<Student> GetNotVolunteersStudents(Volunteer volunteer)
         {
             List<Student> volunteerStudents = GetVolunteerStudents(volunteer);
@@ -212,7 +209,6 @@ namespace AngelsManagement
             {
                 notVolunteersStudents = ctx.Students.ToList();
             }
-
             
             //exclude students that the volunteer has from the list
             //notVolunteerStudents
@@ -246,27 +242,27 @@ namespace AngelsManagement
             }
         }
 
-        //returns a list of parents that student from parameter has
-        public List<Parent> GetStudentParents(Student student)
+        //returns a list of guardians that student from parameter has
+        public List<Guardian> GetStudentGuardians(Student student)
         {
-            List<Parent> parents = new List<Parent>();
+            List<Guardian> guardians = new List<Guardian>();
 
             using (var ctx = new PeopleContext())
             {
                 //get student by id
                 List<Student> students = ctx.Students
                     .Where(s => s.StudentId == student.StudentId)
-                    .Include(e => e.StudentParents)
-                    .ThenInclude(e => e.Parent)
+                    .Include(e => e.StudentGuardians)
+                    .ThenInclude(e => e.Guardian)
                     .ToList();
 
-                //get parents of that student
-                parents =
-                  students.First().StudentParents
-                  .Select(e => e.Parent)
+                //get guardians of that student
+                guardians =
+                  students.First().StudentGuardians
+                  .Select(e => e.Guardian)
                   .ToList();
             }
-            return parents;
+            return guardians;
         }
     }
 }

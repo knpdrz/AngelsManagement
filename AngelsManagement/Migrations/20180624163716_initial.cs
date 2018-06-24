@@ -7,10 +7,10 @@ namespace AngelsManagement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Parents",
+                name: "Guardians",
                 columns: table => new
                 {
-                    ParentId = table.Column<long>(nullable: false)
+                    GuardianId = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -19,7 +19,7 @@ namespace AngelsManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parents", x => x.ParentId);
+                    table.PrimaryKey("PK_Guardians", x => x.GuardianId);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,16 +62,16 @@ namespace AngelsManagement.Migrations
                 columns: table => new
                 {
                     StudentId = table.Column<long>(nullable: false),
-                    ParentId = table.Column<long>(nullable: false)
+                    GuardianId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StuPar", x => new { x.StudentId, x.ParentId });
+                    table.PrimaryKey("PK_StuPar", x => new { x.StudentId, x.GuardianId });
                     table.ForeignKey(
-                        name: "FK_StuPar_Parents_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Parents",
-                        principalColumn: "ParentId",
+                        name: "FK_StuPar_Guardians_GuardianId",
+                        column: x => x.GuardianId,
+                        principalTable: "Guardians",
+                        principalColumn: "GuardianId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StuPar_Students_StudentId",
@@ -106,9 +106,9 @@ namespace AngelsManagement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StuPar_ParentId",
+                name: "IX_StuPar_GuardianId",
                 table: "StuPar",
-                column: "ParentId");
+                column: "GuardianId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VolStu_StudentId",
@@ -125,7 +125,7 @@ namespace AngelsManagement.Migrations
                 name: "VolStu");
 
             migrationBuilder.DropTable(
-                name: "Parents");
+                name: "Guardians");
 
             migrationBuilder.DropTable(
                 name: "Students");

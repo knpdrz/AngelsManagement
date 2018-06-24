@@ -168,16 +168,17 @@
     </ApplicationDefinition>
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\TabsManager.cs" />
-    <Compile Include="Migrations\20180624091013_initial.cs" />
-    <Compile Include="Migrations\20180624091013_initial.designer.cs">
-      <DependentUpon>20180624091013_initial.cs</DependentUpon>
+    <Compile Include="Managers\ValidationManager.cs" />
+    <Compile Include="Migrations\20180624163716_initial.cs" />
+    <Compile Include="Migrations\20180624163716_initial.designer.cs">
+      <DependentUpon>20180624163716_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PeopleContextModelSnapshot.cs" />
     <Compile Include="Model\PeopleContext.cs" />
     <Compile Include="Model\StuPar.cs" />
     <Compile Include="Model\VolStu.cs" />
-    <Compile Include="Windows\AddParentToStudentWindow.xaml.cs">
-      <DependentUpon>AddParentToStudentWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AddGuardianToStudentWindow.xaml.cs">
+      <DependentUpon>AddGuardianToStudentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AddStudentToVWindow.xaml.cs">
       <DependentUpon>AddStudentToVWindow.xaml</DependentUpon>
@@ -188,7 +189,7 @@
     <Compile Include="Windows\VolunteerDetailsWindow.xaml.cs">
       <DependentUpon>VolunteerDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\AddParentToStudentWindow.xaml">
+    <Page Include="Windows\AddGuardianToStudentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,7 +219,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Parent.cs" />
+    <Compile Include="Model\Guardian.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Volunteer.cs" />
     <Compile Include="Globals.cs" />

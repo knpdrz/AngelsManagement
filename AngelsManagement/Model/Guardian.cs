@@ -8,16 +8,14 @@ using static AngelsManagement.Globals;
 
 namespace AngelsManagement.Model
 {
-    public class Student
+    public class Guardian
     {
-        public Int64 StudentId { get; set; }
+        public Int64 GuardianId { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        public Int64 BirthYear { get; set; }
+        public String PhoneNumber { get; set; }
         public String City { get; set; }
-        public String School { get; set; }
 
-        public ICollection<VolStu> VolunteerStudents { get; set; }
         public ICollection<StuPar> StudentGuardians { get; set; }
 
         public override bool Equals(object obj)
@@ -26,19 +24,20 @@ namespace AngelsManagement.Model
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            Student other = (Student)obj;
-            return (StudentId == other.StudentId);
+            Guardian other = (Guardian)obj;
+            return (GuardianId == other.GuardianId);
         }
 
         public override int GetHashCode()
         {
-            return (int)(StudentId*BirthYear);
+            //todo maybe some better implementation?
+            return (int)(GuardianId * Int32.Parse(PhoneNumber[0].ToString()));
         }
 
         //returns a list of string explanations of why were some/all 
         //input fields invalid (while getting data to create guardian object)
-        public static List<String> FindStudentValidationErrors(string firstName,
-            string lastName, string birthYear, string school)
+        public static List<String> FindGuardianValidationErrors(string firstName, 
+            string lastName, string phoneNumber)
         {
             List<String> errorReason = new List<string>();
 
@@ -52,40 +51,24 @@ namespace AngelsManagement.Model
                 errorReason.Add(LastNameErrorText + lastName);
             }
 
-            if (!ValidationManager.IsBirthYearValid(birthYear))
+            if (!ValidationManager.IsPhoneNumberValid(phoneNumber))
             {
-                errorReason.Add(YearErrorText + birthYear);
-            }
-
-            if (!ValidationManager.IsSchoolNameValid(school))
-            {
-                errorReason.Add(SchoolErrorText + school);
+                errorReason.Add(PhoneErrorText + phoneNumber);
             }
 
             return errorReason;
         }
 
-        public Student(long studentId, string firstName, string lastName, long birthYear, string city, string school)
-        {
-            StudentId = studentId;
-            FirstName = firstName;
-            LastName = lastName;
-            BirthYear = birthYear;
-            City = city;
-            School = school;
-        }
-
-
-
         //constructor that takes user input and parses it accordingly
-        public Student(string firstName, string lastName, 
-            string birthYear, string school, string city)
+        public Guardian(string firstName,
+            string lastName, string phoneNumber, string city)
         {
             //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
             FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
             LastName = new String(lastName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
-            BirthYear = Int64.Parse(birthYear);
-            School = school;
+
+            PhoneNumber = phoneNumber;
+
             City = city;//todo is it worth changing to enum?
         }
     }

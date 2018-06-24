@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static AngelsManagement.Globals;
 
 namespace AngelsManagement
 {
@@ -34,24 +35,29 @@ namespace AngelsManagement
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
             string birthYearString = BirthYearTextBox.Text;
-
-            int birthYear = Int32.Parse(birthYearString);//todoo
+            string birthYear = birthYearString;
             string city = ((ComboBoxItem)CityComboBox.SelectedItem).Content.ToString();
             string school = SchoolTextBox.Text;
 
-            if (IsInputValid())
-            {
-                Student student = new Student
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    BirthYear = birthYear,
-                    City = city,
-                    School = school
-                };
+            List<String> errorsList =
+               Student.FindStudentValidationErrors(firstName, lastName, 
+               birthYear, school);
 
+            if (errorsList.Count() == 0)//if there are no errors
+            {
+                Student student = new Student(firstName,
+                                    lastName, birthYear, school, city);
                 AddStudent(student);
-                Close();
+
+            }
+            else
+            {
+                //show dialog with information which data were incorrect
+                var errorString = String.Join("\n", errorsList.ToArray());
+                MessageBoxResult result = System.Windows.MessageBox.Show(errorString,
+                        ErrorText,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
             }
 
         }
@@ -59,11 +65,9 @@ namespace AngelsManagement
         private void AddStudent(Student student)
         {
             dataManager.AddStudent(student);
+            Close();
         }
 
-        private bool IsInputValid()//todo validation
-        {
-            return true;
-        }
+      
     }
 }

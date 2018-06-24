@@ -9,9 +9,9 @@ namespace AngelsManagement.Model
     public class StuPar
     {
         public Int64 StudentId { get; set; }
-        public Int64 ParentId { get; set; }
+        public Int64 GuardianId { get; set; }
         public Student Student { get; set; }
-        public Parent Parent { get; set; }
+        public Guardian Guardian { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@ namespace AngelsManagement.Model
     {
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Parent> Parents { get; set; }
+        public DbSet<Guardian> Guardians { get; set; }
 
         public PeopleContext() :base()
         {
@@ -41,19 +41,19 @@ namespace AngelsManagement.Model
                 .WithMany(s => s.VolunteerStudents)
                 .HasForeignKey(vs => vs.StudentId);
 
-            //same for Parent-Student relationship
+            //same for guardian-Student relationship
             modelBuilder.Entity<StuPar>()
-                .HasKey(sp => new { sp.StudentId, sp.ParentId });
+                .HasKey(sp => new { sp.StudentId, sp.GuardianId });
 
             modelBuilder.Entity<StuPar>()
                 .HasOne(sp => sp.Student)
-                .WithMany(s => s.StudentParents)
+                .WithMany(s => s.StudentGuardians)
                 .HasForeignKey(sp => sp.StudentId);
 
             modelBuilder.Entity<StuPar>()
-                .HasOne(sp => sp.Parent)
-                .WithMany(p => p.StudentParents)
-                .HasForeignKey(sp => sp.ParentId);
+                .HasOne(sp => sp.Guardian)
+                .WithMany(p => p.StudentGuardians)
+                .HasForeignKey(sp => sp.GuardianId);
         }
 
 

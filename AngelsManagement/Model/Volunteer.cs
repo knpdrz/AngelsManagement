@@ -1,11 +1,8 @@
-﻿using System;
+﻿using AngelsManagement.Managers;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using static AngelsManagement.Globals;
 namespace AngelsManagement.Model
 {
     public class Volunteer
@@ -33,6 +30,68 @@ namespace AngelsManagement.Model
         public override int GetHashCode()
         {
             return (int)(VolunteerId * BirthYear);
+        }
+
+        //returns a list of string explanations of why were some/all 
+        //input fields invalid (while getting data to create volunteer object)
+        public static List<String> FindVolunteerValidationErrors(string firstName,
+            string lastName, string birthYear, string email, string address)
+        {
+            List<String> errorReason = new List<string>();
+
+            if (!ValidationManager.IsNameValid(firstName))
+            {
+                errorReason.Add(FirstNameErrorText + firstName);
+            }
+
+            if (!ValidationManager.IsNameValid(lastName))
+            {
+                errorReason.Add(LastNameErrorText + lastName);
+            }
+
+            if (!ValidationManager.IsBirthYearValid(birthYear))
+            {
+                errorReason.Add(YearErrorText + birthYear);
+            }
+
+            if (!ValidationManager.IsEmailValid(email))
+            {
+                errorReason.Add(EmailErrorText + email);
+            }
+
+            if (!ValidationManager.IsAddressValid(address))
+            {
+                errorReason.Add(AddressErrorText + address);
+            }
+            
+            return errorReason;
+        }
+
+        public Volunteer(long volunteerId, string firstName, string lastName, 
+            long birthYear, string city, string address, string email)
+        {
+            VolunteerId = volunteerId;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthYear = birthYear;
+            City = city;
+            Address = address;
+            Email = email;
+        }
+
+
+
+        //constructor that takes user input and parses it accordingly
+        public Volunteer(string firstName,
+            string lastName, string birthYear, string email, string city, string address)
+        {
+            //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
+            FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+            LastName = new String(lastName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+            Email = email;
+            BirthYear = Int64.Parse(birthYear);
+            Address = address;
+            City = city;//todo is it worth changing to enum?
         }
     }
 }

@@ -43,16 +43,16 @@
             </ComboBox>
 
             <Label Grid.Row="5">Rodzice</Label>
-            <DataGrid x:Name="ParentsDataGrid" Grid.Row="5" Grid.Column="1" 
+            <DataGrid x:Name="guardiansDataGrid" Grid.Row="5" Grid.Column="1" 
                       HorizontalAlignment="Center" Height="58" Margin="3,0,-159,52"  
                       VerticalAlignment="Bottom" Width="457"
                       IsReadOnly="True"/>
 
         </Grid>
-        <Button x:Name="AddParentButton" 
+        <Button x:Name="AddGuardianButton" 
                 Content="Dodaj rodzica" 
                 HorizontalAlignment="Center" Margin="0,0,0,5" 
-                VerticalAlignment="Bottom" Width="Auto" Click="AddParentButton_Click"/>
+                VerticalAlignment="Bottom" Width="Auto" Click="AddGuardianButton_Click"/>
 
 
     </Grid>

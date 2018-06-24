@@ -39,21 +39,22 @@ namespace AngelsManagement.Windows
             FirstNameTextBox.Text = student.FirstName;
             LastNameTextBox.Text = student.LastName;
             BirthYearTextBox.Text = student.BirthYear.ToString();
+            SchoolTextBox.Text = student.School;
             CityComboBox.SelectedItem = student.City;
 
-            UpdateParentsList();
+            UpdateGuardiansList();
         }
 
-        public void UpdateParentsList()
+        public void UpdateGuardiansList()
         {
-            var studentParents = dataManager.GetStudentParents(student);
-            ParentsDataGrid.ItemsSource = studentParents;
+            var studentGuardians = dataManager.GetStudentGuardians(student);
+            guardiansDataGrid.ItemsSource = studentGuardians;
         }
 
-        private void AddParentButton_Click(object sender, RoutedEventArgs e)
+        private void AddGuardianButton_Click(object sender, RoutedEventArgs e)
         {
-            AddParentToStudentWindow addStudentToVWindow =
-              new AddParentToStudentWindow(this, dataManager, student);
+            AddGuardianToStudentWindow addStudentToVWindow =
+              new AddGuardianToStudentWindow(this, dataManager, student);
 
             //make this window unclickable
             IsEnabled = false;

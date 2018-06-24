@@ -1,4 +1,4 @@
-﻿<Window x:Class="AngelsManagement.Windows.AddParentToStudentWindow"
+﻿<Window x:Class="AngelsManagement.Windows.AddGuardianToStudentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -39,9 +39,9 @@
             </ComboBox>
 
         </Grid>
-        <Button x:Name="AddParentButton" Content="Dodaj rodzica" 
+        <Button x:Name="AddguardianButton" Content="Dodaj rodzica" 
                HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="Auto"
-                Margin="0,0,0,10" Click="AddParentButton_Click"/>
+                Margin="0,0,0,10" Click="AddGuardianButton_Click"/>
         <TextBlock x:Name="InfoTextBlock" HorizontalAlignment="Left" 
                    Margin="10,10,0,0" TextWrapping="Wrap" Text="Dodaj rodzica podopiecznemu: " 
                    VerticalAlignment="Top"/>

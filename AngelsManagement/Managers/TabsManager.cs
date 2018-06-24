@@ -13,6 +13,8 @@ using System.Windows.Input;
 using static AngelsManagement.Globals;
 namespace AngelsManagement.Managers
 {
+    //class for managing tabs (TabControls) in the MainWindow
+    //(setting volunteers, students and guardians data in the correct city tab)
     public class TabsManager
     {
         private MainWindow window;
@@ -23,15 +25,15 @@ namespace AngelsManagement.Managers
             this.window = window;
             this.dataManager = dataManager;
             InitializeTabs();
-
         }
 
         private void InitializeTabs()
         {
             InitializeVolunteersTab();
             InitializeStudentsTab();
-            InitializeParentsTab();
+            InitializeguardiansTab();
         }
+
         private void AddColumnWithBinding(string header, string bindingName, DataGrid dataGrid)
         {
             var col = new DataGridTextColumn();
@@ -69,7 +71,6 @@ namespace AngelsManagement.Managers
                                          new MouseButtonEventHandler(mouseButtonEventHandler)));
                 dataGrid.RowStyle = rowStyle;
             }
-          
             return dataGrid;
         }
 
@@ -90,17 +91,15 @@ namespace AngelsManagement.Managers
             DataGrid dataGrid = CreateDataGrid(itemsSource, 
                 columnNames, mouseButtonEventHandler);
             tabItem.Content = dataGrid;
-
         }
 
-        private void InitializeVolunteersTab()//todo- refactor- code duplication
+        private void InitializeVolunteersTab()
         {
-            String[] cities = dataManager.Cities;
             //manage volunteers tab (called VolunteersTabControl, has tabs with all cities)
             Dictionary<String, ObservableCollection<Volunteer>> volunteersDict =
                 dataManager.VolunteersDict;
 
-            foreach (string city in cities)
+            foreach (string city in Cities)
             {
                 if (volunteersDict.ContainsKey(city))
                 {
@@ -124,13 +123,11 @@ namespace AngelsManagement.Managers
 
         private void InitializeStudentsTab()
         {
-            String[] cities = dataManager.Cities;
-
             //manage students tab (called StudentsTabControl, has tabs with all cities)
             Dictionary<String, ObservableCollection<Student>> studentsDict =
                 dataManager.StudentsDict;
 
-            foreach (string city in cities)
+            foreach (string city in Cities)
             {
                 if (studentsDict.ContainsKey(city))
                 {
@@ -152,20 +149,18 @@ namespace AngelsManagement.Managers
             studentDetailsWindow.Show();
         }
 
-        private void InitializeParentsTab()
+        private void InitializeguardiansTab()
         {
-            String[] cities = dataManager.Cities;
+            //manage students tab (called guardiansTabControl, has tabs with all cities)
+            Dictionary<String, ObservableCollection<Guardian>> guardiansDict =
+                dataManager.GuardiansDict;
 
-            //manage students tab (called ParentsTabControl, has tabs with all cities)
-            Dictionary<String, ObservableCollection<Parent>> parentsDict =
-                dataManager.ParentsDict;
-
-            foreach (string city in cities)
+            foreach (string city in Cities)
             {
-                if (parentsDict.ContainsKey(city))
+                if (guardiansDict.ContainsKey(city))
                 {
-                    CreateCityTab(window.ParentsTabControl,
-                        parentsDict[city], city, ParentsColumnNamesBindings,
+                    CreateCityTab(window.guardiansTabControl,
+                        guardiansDict[city], city, GuardiansColumnNamesBindings,
                         null);
                 }
             }

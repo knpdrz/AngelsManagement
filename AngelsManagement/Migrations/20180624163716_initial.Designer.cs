@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngelsManagement.Migrations
 {
     [DbContext(typeof(PeopleContext))]
-    [Migration("20180624091013_initial")]
+    [Migration("20180624163716_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,9 +17,9 @@ namespace AngelsManagement.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
-            modelBuilder.Entity("AngelsManagement.Model.Parent", b =>
+            modelBuilder.Entity("AngelsManagement.Model.Guardian", b =>
                 {
-                    b.Property<long>("ParentId")
+                    b.Property<long>("GuardianId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("City");
@@ -30,9 +30,9 @@ namespace AngelsManagement.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.HasKey("ParentId");
+                    b.HasKey("GuardianId");
 
-                    b.ToTable("Parents");
+                    b.ToTable("Guardians");
                 });
 
             modelBuilder.Entity("AngelsManagement.Model.Student", b =>
@@ -59,11 +59,11 @@ namespace AngelsManagement.Migrations
                 {
                     b.Property<long>("StudentId");
 
-                    b.Property<long>("ParentId");
+                    b.Property<long>("GuardianId");
 
-                    b.HasKey("StudentId", "ParentId");
+                    b.HasKey("StudentId", "GuardianId");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("GuardianId");
 
                     b.ToTable("StuPar");
                 });
@@ -105,13 +105,13 @@ namespace AngelsManagement.Migrations
 
             modelBuilder.Entity("AngelsManagement.Model.StuPar", b =>
                 {
-                    b.HasOne("AngelsManagement.Model.Parent", "Parent")
-                        .WithMany("StudentParents")
-                        .HasForeignKey("ParentId")
+                    b.HasOne("AngelsManagement.Model.Guardian", "Guardian")
+                        .WithMany("StudentGuardians")
+                        .HasForeignKey("GuardianId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AngelsManagement.Model.Student", "Student")
-                        .WithMany("StudentParents")
+                        .WithMany("StudentGuardians")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

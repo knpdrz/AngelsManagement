@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement"
         mc:Ignorable="d"
-        Title="Dodaj wolontariusza" Height="288.878" Width="451.059">
+        Title="Dodaj wolontariusza" Height="391.791" Width="516.959">
     <Grid>
         <Grid Margin="20,20,0,96">
             <Grid.ColumnDefinitions>
@@ -17,6 +17,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
 
@@ -27,15 +29,19 @@
 
             <Label Grid.Row="2">Rok urodzenia</Label>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="BirthYearTextBox"/>
-            <Label Grid.Row="3">Miasto</Label>
-            <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
+            <Label Grid.Row="3">Email</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,0,10" x:Name="EmailTextBox"/>
+            <Label Grid.Row="4">Adres</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="5,5,0,10" x:Name="AddressTextBox"/>
+            <Label Grid.Row="5">Miasto</Label>
+            <ComboBox x:Name="CityComboBox" Grid.Row="5" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
                 <ComboBoxItem IsSelected="True">
                     Gdansk
                 </ComboBoxItem>
                 <ComboBoxItem>Wroclaw</ComboBoxItem>
                 <ComboBoxItem>Poznan</ComboBoxItem>
             </ComboBox>
-            </Grid>
+        </Grid>
         <Button x:Name="AddVolunteerButton" Content="Dodaj wolontariusza" 
                HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="Auto"
                 Margin="0,0,0,10" Click="AddVolunteerButton_Click"/>
