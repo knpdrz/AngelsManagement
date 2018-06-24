@@ -15,5 +15,38 @@ namespace AngelsManagement
         public static string dbFilePath = appDataFolderPath + "\\" + dbFileName;
         public static string connectionString = "Data source=" + dbFilePath;
 
+        public static Dictionary<String, String> VolunteersColumnNamesBindings = 
+            new Dictionary<string, string>
+        {
+            { "id", "VolunteerId" },
+            { "Imię", "FirstName" },
+            { "Nazwisko", "LastName" },
+            { "Rok urodzenia", "BirthYear" },
+            { "Miasto", "City" },
+            { "Adres", "Address" },
+            { "Email", "Email" }
+        };
+
+        public static Dictionary<String, String> StudentsColumnNamesBindings =
+            new Dictionary<string, string>
+        {
+            { "id", "StudentId" },
+            { "Imię", "FirstName" },
+            { "Nazwisko", "LastName" },
+            { "Rok urodzenia", "BirthYear" },
+            { "Miasto", "City" },
+            { "Szkoła", "School" }
+        };
+
+        public static Dictionary<String, String> ParentsColumnNamesBindings =
+            new Dictionary<string, string>
+        {
+            { "id", "ParentId" },
+            { "Imię", "FirstName" },
+            { "Nazwisko", "LastName" },
+            { "Miasto", "City" },
+            { "Numer telefonu", "PhoneNumber" }
+        };
+
     }
 }

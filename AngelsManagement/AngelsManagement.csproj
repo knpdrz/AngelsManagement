@@ -166,7 +166,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataManager.cs" />
+    <Compile Include="Managers\DataManager.cs" />
+    <Compile Include="Managers\TabsManager.cs" />
     <Compile Include="Migrations\20180624091013_initial.cs" />
     <Compile Include="Migrations\20180624091013_initial.designer.cs">
       <DependentUpon>20180624091013_initial.cs</DependentUpon>
@@ -175,12 +176,22 @@
     <Compile Include="Model\PeopleContext.cs" />
     <Compile Include="Model\StuPar.cs" />
     <Compile Include="Model\VolStu.cs" />
+    <Compile Include="Windows\AddParentToStudentWindow.xaml.cs">
+      <DependentUpon>AddParentToStudentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddStudentToVWindow.xaml.cs">
       <DependentUpon>AddStudentToVWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StudentDetailsWindow.xaml.cs">
+      <DependentUpon>StudentDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\VolunteerDetailsWindow.xaml.cs">
       <DependentUpon>VolunteerDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\AddParentToStudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddStudentToVWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,16 +218,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataManagerOld.cs" />
     <Compile Include="Model\Parent.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Volunteer.cs" />
-    <Compile Include="DbManager.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\StudentDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\VolunteerDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

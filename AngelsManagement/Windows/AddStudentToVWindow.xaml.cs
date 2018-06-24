@@ -41,7 +41,7 @@ namespace AngelsManagement.Windows
         private void SetStudentsData()
         {
             //todo maybe display more data about volunteer?
-            VolunteerTextBlock.Text += volunteer.FirstName + " " + volunteer.LastName;
+            InfoTextBlock.Text += volunteer.FirstName + " " + volunteer.LastName;
 
             List<Student> students = 
                 dataManager.GetNotVolunteersStudents(volunteer);
@@ -68,8 +68,8 @@ namespace AngelsManagement.Windows
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            volunteerDetailsWindow.IsEnabled = true;
             Close();
-            //does it all work with commits?
         }
     }
 }

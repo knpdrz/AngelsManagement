@@ -118,7 +118,37 @@ namespace AngelsManagement
             }
         }
 
-        
+        //todo watch it! both need to have id set already! (id is given upon adding to db)
+        //adds parent to database AND (todo?) adds them to correct student
+        public void AddParentToStudent(Student student, Parent parent)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Parents.Add(parent);
+                ctx.SaveChanges();
+            }
+
+            //adding new parent to observable collection
+            //in correct city
+            ParentsDict[parent.City].Add(parent);
+
+            Console.WriteLine("PARENT ID = " + parent.ParentId);
+
+            //adding connection between student and parent
+            StuPar stuPar;
+
+            using (var ctx = new PeopleContext())
+            {
+                stuPar = new StuPar
+                {
+                    StudentId = student.StudentId,
+                    ParentId = parent.ParentId
+                };
+                ctx.Add(stuPar);
+
+                ctx.SaveChanges();
+            }
+        }
 
         public void AddVolunteer(Volunteer volunteer)
         {
@@ -130,12 +160,7 @@ namespace AngelsManagement
 
             //adding new volunteer to observable collection
             //in correct city
-            //todo- this should be separated in a function
-            if (!VolunteersDict.ContainsKey(volunteer.City))
-            {
-                VolunteersDict[volunteer.City] = 
-                    new ObservableCollection<Volunteer>();
-            }
+            //todo- this should be separated in a function?
             VolunteersDict[volunteer.City].Add(volunteer);
 
         }
@@ -219,6 +244,29 @@ namespace AngelsManagement
                 ctx.SaveChanges();
 
             }
+        }
+
+        //returns a list of parents that student from parameter has
+        public List<Parent> GetStudentParents(Student student)
+        {
+            List<Parent> parents = new List<Parent>();
+
+            using (var ctx = new PeopleContext())
+            {
+                //get student by id
+                List<Student> students = ctx.Students
+                    .Where(s => s.StudentId == student.StudentId)
+                    .Include(e => e.StudentParents)
+                    .ThenInclude(e => e.Parent)
+                    .ToList();
+
+                //get parents of that student
+                parents =
+                  students.First().StudentParents
+                  .Select(e => e.Parent)
+                  .ToList();
+            }
+            return parents;
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿<Window x:Class="AngelsManagement.Windows.AddParentToStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AngelsManagement.Windows"
+        mc:Ignorable="d"
+        Title="Dodaj rodzica" Height="264.408" Width="460.073">
+    <Grid>
+
+        <Grid Margin="20,34,0,60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Row="0">Imię</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox"/>
+            <Label Grid.Row="1">Nazwisko</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox"/>
+
+            <Label Grid.Row="2">Numer telefonu</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="PhoneTextBox"/>
+
+            <Label Grid.Row="3">Miasto</Label>
+            <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
+                <ComboBoxItem IsSelected="True">
+                    Gdansk
+                </ComboBoxItem>
+                <ComboBoxItem>Wroclaw</ComboBoxItem>
+                <ComboBoxItem>Poznan</ComboBoxItem>
+            </ComboBox>
+
+        </Grid>
+        <Button x:Name="AddParentButton" Content="Dodaj rodzica" 
+               HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="Auto"
+                Margin="0,0,0,10" Click="AddParentButton_Click"/>
+        <TextBlock x:Name="InfoTextBlock" HorizontalAlignment="Left" 
+                   Margin="10,10,0,0" TextWrapping="Wrap" Text="Dodaj rodzica podopiecznemu: " 
+                   VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

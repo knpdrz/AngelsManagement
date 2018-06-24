@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Wybierz podopiecznych wolontariusza" Height="533.898" Width="623.983">
     <Grid>
-        <TextBlock x:Name="VolunteerTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" 
+        <TextBlock x:Name="InfoTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" 
                    TextWrapping="Wrap" Text="Wybierz podopiecznych dla wolontariusza: " VerticalAlignment="Top"/>
         <TextBlock x:Name="HelpTextBlock" HorizontalAlignment="Left" Margin="10,37,0,0" 
                    TextWrapping="Wrap" Text="Kliknij na wiersz z podopiecznym, którego chcesz dodać (przytrzymaj Ctrl do wyboru większej liczby podopiecznych) i zaakceptuj przyciskiem 'Dodaj zaznaczonych podopiecznych'." VerticalAlignment="Top" Width="596" Foreground="#FF878585"/>
