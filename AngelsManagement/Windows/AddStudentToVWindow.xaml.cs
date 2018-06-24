@@ -69,6 +69,7 @@ namespace AngelsManagement.Windows
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            //does it all work with commits?
         }
     }
 }
