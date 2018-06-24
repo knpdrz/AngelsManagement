@@ -41,6 +41,21 @@ namespace AngelsManagement.Windows
             BirthYearTextBox.Text = volunteer.BirthYear.ToString();
             CityComboBox.SelectedItem = volunteer.City;
 
+            UpdateStudentsList();
+        }
+
+        private void AddStudentButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddStudentToVWindow addStudentToVWindow =
+               new AddStudentToVWindow(this, dataManager, volunteer);
+
+            //make this window unclickable
+            IsEnabled = false;
+            addStudentToVWindow.Show();
+        }
+
+        public void UpdateStudentsList()
+        {
             var volunteerStudents = dataManager.GetVolunteerStudents(volunteer);
             StudentsDataGrid.ItemsSource = volunteerStudents;
         }

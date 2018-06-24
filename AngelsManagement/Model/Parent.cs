@@ -16,5 +16,20 @@ namespace AngelsManagement.Model
 
         public ICollection<StuPar> StudentParents { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            // Check for null values and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Parent other = (Parent)obj;
+            return (ParentId == other.ParentId);
+        }
+
+        public override int GetHashCode()
+        {
+            //todo maybe some better implementation?
+            return (int)(ParentId * Int32.Parse(PhoneNumber[0].ToString()));
+        }
     }
 }

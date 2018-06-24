@@ -153,24 +153,72 @@ namespace AngelsManagement
 
         }
 
+        //returns a list of students that volunteer from parameter has
         public List<Student> GetVolunteerStudents(Volunteer volunteer)
         {
             List<Student> students = new List<Student>();
 
             using (var ctx = new PeopleContext())
             {
+                //get volunteer by id
                 List<Volunteer> volunteers = ctx.Volunteers
                     .Where(v => v.VolunteerId == volunteer.VolunteerId)
                     .Include(e => e.VolunteerStudents)
                     .ThenInclude(e => e.Student)
                     .ToList();
 
+                //get students of that volunteer
                 students =
                   volunteers.First().VolunteerStudents
                   .Select(e => e.Student)
                   .ToList();
             }
             return students;
+        }
+
+        //returns a list with all students that volunteer doesn't have (as students)
+        //todo differentiation between already added ones..?
+        public List<Student> GetNotVolunteersStudents(Volunteer volunteer)
+        {
+            List<Student> volunteerStudents = GetVolunteerStudents(volunteer);
+            List<Student> notVolunteersStudents;
+
+            using (var ctx = new PeopleContext())
+            {
+                notVolunteersStudents = ctx.Students.ToList();
+            }
+
+            
+            //exclude students that the volunteer has from the list
+            //notVolunteerStudents
+            foreach (Student student in volunteerStudents)
+                notVolunteersStudents.Remove(student);
+
+           
+            return notVolunteersStudents;
+        }
+
+        //creates entities <volunteerId, studentId> in the database
+        //that represent many to many relationship between students and volunteers
+        //EF core takes care of pairing them
+        public void AddStudentsToVolunteer(Volunteer volunteer, List<Student> students)
+        {
+            VolStu volStu;
+
+            using (var ctx = new PeopleContext())
+            {
+                foreach(Student student in students)
+                {
+                    volStu = new VolStu
+                    {
+                        VolunteerId = volunteer.VolunteerId,
+                        StudentId = student.StudentId
+                    };
+                    ctx.Add(volStu);
+                }
+                ctx.SaveChanges();
+
+            }
         }
     }
 }

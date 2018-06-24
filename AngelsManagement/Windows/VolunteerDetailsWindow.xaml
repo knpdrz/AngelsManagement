@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement"
         mc:Ignorable="d"
-        Title="VolunteerDetailsWindow" Height="350" Width="500">
+        Title="VolunteerDetailsWindow" Height="350" Width="638.403">
     <Grid>
         <Grid Margin="20,20,0,0">
             <Grid.ColumnDefinitions>
@@ -18,19 +18,20 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                
+
             </Grid.RowDefinitions>
 
 
             <Label Grid.Row="0">Imię</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox"/>
+            <TextBox IsReadOnly="True" Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox"/>
             <Label Grid.Row="1">Nazwisko</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox"/>
+            <TextBox IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox"/>
 
             <Label Grid.Row="2">Rok urodzenia</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="BirthYearTextBox"/>
+            <TextBox IsReadOnly="True" Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="BirthYearTextBox"/>
             <Label Grid.Row="3">Miasto</Label>
-            <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5">
+            <ComboBox IsReadOnly="True" x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" 
+                      Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5">
                 <ComboBoxItem IsSelected="True">
                     Gdansk
                 </ComboBoxItem>
@@ -40,11 +41,16 @@
 
             <Label Grid.Row="4">Podopieczni</Label>
             <DataGrid x:Name="StudentsDataGrid" Grid.Row="4" Grid.Column="1" 
-                      HorizontalAlignment="Center" Height="100" Margin="5,5,0,10"  
-                      VerticalAlignment="Bottom" Width="300"
+                      HorizontalAlignment="Center" Height="123" Margin="3,0,-159,-13"  
+                      VerticalAlignment="Bottom" Width="457"
                       IsReadOnly="True"/>
 
         </Grid>
+        <Button x:Name="AddStudentButton" 
+                Content="Dodaj podopiecznego" 
+                HorizontalAlignment="Center" Margin="0,0,0,5" 
+                VerticalAlignment="Bottom" Width="Auto" Click="AddStudentButton_Click"/>
+
 
     </Grid>
 </Window>
