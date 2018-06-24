@@ -17,5 +17,20 @@ namespace AngelsManagement.Model
         public String Email { get; set; }
 
         public ICollection<VolStu> VolunteerStudents { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            // Check for null values and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Volunteer other = (Volunteer)obj;
+            return (VolunteerId == other.VolunteerId);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)(VolunteerId * BirthYear);
+        }
     }
 }

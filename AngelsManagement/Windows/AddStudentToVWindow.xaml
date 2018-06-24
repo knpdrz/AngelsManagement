@@ -5,6 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement.Windows"
         mc:Ignorable="d"
-        Title="AddStudentToVWindow" Height="450" Width="460">
-    <Grid/>
+        Title="Wybierz podopiecznych wolontariusza" Height="533.898" Width="623.983">
+    <Grid>
+        <TextBlock x:Name="VolunteerTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" 
+                   TextWrapping="Wrap" Text="Wybierz podopiecznych dla wolontariusza: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="HelpTextBlock" HorizontalAlignment="Left" Margin="10,37,0,0" 
+                   TextWrapping="Wrap" Text="Kliknij na wiersz z podopiecznym, którego chcesz dodać (przytrzymaj Ctrl do wyboru większej liczby podopiecznych) i zaakceptuj przyciskiem 'Dodaj zaznaczonych podopiecznych'." VerticalAlignment="Top" Width="596" Foreground="#FF878585"/>
+        <DataGrid x:Name="StudentsDataGrid" IsReadOnly="True"
+                  HorizontalAlignment="Left" Height="383" Margin="10,77,0,0" 
+                  VerticalAlignment="Top" Width="596">
+            <!-- todo- for the future 
+            <DataGrid.Columns>
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+            -->
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AddSelectedButton" 
+                Content="Dodaj zaznaczonych podopiecznych" 
+                HorizontalAlignment="Center" Margin="0,0,5,5" 
+                VerticalAlignment="Bottom" Width="Auto" Click="AddSelectedButton_Click"/>
+            <Button x:Name="CancelButton" 
+                    Content="Anuluj" 
+                    HorizontalAlignment="Center" Margin="5,0,0,5" 
+                    VerticalAlignment="Bottom" Width="Auto" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
 </Window>

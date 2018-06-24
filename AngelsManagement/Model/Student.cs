@@ -18,5 +18,20 @@ namespace AngelsManagement.Model
         public ICollection<VolStu> VolunteerStudents { get; set; }
         public ICollection<StuPar> StudentParents { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            // Check for null values and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Student other = (Student)obj;
+            return (StudentId == other.StudentId);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)(StudentId*BirthYear);
+        }
+
     }
 }
