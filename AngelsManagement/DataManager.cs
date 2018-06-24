@@ -1,4 +1,5 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,118 +11,166 @@ namespace AngelsManagement
 {
     public class DataManager
     {
-        private DbManager dbManager;
-
-
-        private String[] cities = { "Gdansk", "Wroclaw", "Poznan" };
-        //todo- this is for the future (keep a map city-{volo,stud,par}?)
-        //right now we're just doing one city
-
-        //todo enum not string for city
-        //dictionary of volunteers in form <city, volunteers list>
+        public String[] Cities = { "Gdansk", "Wroclaw", "Poznan" };
         public Dictionary<String, ObservableCollection<Volunteer>> VolunteersDict { get; set; }
         public Dictionary<String, ObservableCollection<Student>> StudentsDict { get; set; }
-        /*
-        Dictionary<String, ObservableCollection<Parent>> ParentsDict;*///todo
+        public Dictionary<String, ObservableCollection<Parent>> ParentsDict { get; set; }
 
         public DataManager()
         {
-            dbManager = new DbManager();
-            
-            PrepareDictionaries();
+            //perform first migration
+            using (PeopleContext context = new PeopleContext())
+            {
+                context.Database.Migrate();
+                
+            }
+            CreateDictionaries();
+            GetPeopleData();
+        }
 
-            GetAllData();
+        private void CreateDictionaries()
+        {
+            VolunteersDict = new Dictionary<string, ObservableCollection<Volunteer>>();
+            StudentsDict = new Dictionary<string, ObservableCollection<Student>>();
+            ParentsDict = new Dictionary<string, ObservableCollection<Parent>>();
 
         }
 
         //for each dictionary (volunteers, students, parents)
-        //creates entries <city, empty observable collection>
-        //this is to ensure that while setting data sources app doesn't crash
-        private void PrepareDictionaries()
+        //creates entries <city, list with volunteers/students/parents>
+        private void GetPeopleData()
         {
-            //volunteers dict
-            VolunteersDict = new Dictionary<string, ObservableCollection<Volunteer>>();
+            List<Volunteer> volunteers;
+            List<Student> students;
+            List<Parent> parents;
 
-            ObservableCollection<Volunteer> vCollection;
-            foreach (string city in cities)
+            using (var ctx = new PeopleContext())
             {
-                vCollection = new ObservableCollection<Volunteer>();
-                VolunteersDict.Add(city, vCollection);
-
-            }
-
-            //students dict
-            StudentsDict = new Dictionary<string, ObservableCollection<Student>>();
-
-            ObservableCollection<Student> sCollection;
-            foreach (string city in cities)
-            {
-                sCollection = new ObservableCollection<Student>();
-                StudentsDict.Add(city, sCollection);
-
-            }
-
-            //todo parents
-        }
-
-        //prepares the database (app directory, file, tables)
-        //sets Volunteers, Students (todo) and Parents (todo) 
-        //properties for each city (todo)
-        private void GetAllData()
-        {
-            dbManager.PrepareDb();
-
-            //get volunteers and put them in volunteers dictionary (key is the city)
-            List<Volunteer> vList;
-            ObservableCollection<Volunteer> vCollection;
-
-            List<Student> sList;
-            ObservableCollection<Student> sCollection;
-
-            foreach (string city in cities)
-            {
-                //--------------volunteers
-                //get a list of all volunteers from city
-                vList = dbManager.GetVolunteersByCity(city);
-                
-                //add them to the collection
-                vCollection = VolunteersDict[city];
-
-                //clear collection //todo this is very ugly
-                vCollection.Clear();
-
-                foreach (Volunteer volunteer in vList)
+                //----------volunteers
+                //for each city add volunteers to the dictionary
+                foreach(string city in Cities)
                 {
-                    vCollection.Add(volunteer);
+                    volunteers = ctx.Volunteers
+                        .Where(v => v.City.Equals(city)).ToList();
+
+                    if (VolunteersDict.ContainsKey(city))
+                    {
+                        VolunteersDict[city].Clear();
+                    }
+                    else
+                    {
+                        VolunteersDict[city] = 
+                            new ObservableCollection<Volunteer>();
+
+                    }
+
+                    foreach (Volunteer volunteer in volunteers)
+                    {
+                        VolunteersDict[city].Add(volunteer);
+                    }
                 }
 
-                VolunteersDict[city]= vCollection;
-
-                //--------------students
-                sList = dbManager.GetStudentsByCity(city);
-                sCollection = StudentsDict[city];
-                sCollection.Clear();
-
-                foreach (Student student in sList)
+                //---------students
+                foreach (string city in Cities)
                 {
-                    sCollection.Add(student);
+                    students = ctx.Students
+                        .Where(s => s.City.Equals(city)).ToList();
+
+                    if (StudentsDict.ContainsKey(city))
+                    {
+                        StudentsDict[city].Clear();
+                    }
+                    else
+                    {
+                        StudentsDict[city] = new ObservableCollection<Student>();
+
+                    }
+
+                    foreach (Student student in students)
+                    {
+                        StudentsDict[city].Add(student);
+                    }
+                    
                 }
 
-                StudentsDict[city] = sCollection;
+                //---------parents
+                foreach (string city in Cities)
+                {
+                    parents = ctx.Parents
+                        .Where(p => p.City.Equals(city)).ToList();
 
-            }//todo same for parents
-            
+                    if (ParentsDict.ContainsKey(city))
+                    {
+                        ParentsDict[city].Clear();
+                    }
+                    else
+                    {
+                        ParentsDict[city] = new ObservableCollection<Parent>();
+
+                    }
+
+                    foreach (Parent parent in parents)
+                    {
+                        ParentsDict[city].Add(parent);
+                    }
+
+                }
+            }
         }
 
-        public void CreateVolunteer(Volunteer volunteer)
+        
+
+        public void AddVolunteer(Volunteer volunteer)
         {
-            dbManager.InsertIntoVolunteers(volunteer);
-            GetAllData();
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Volunteers.Add(volunteer);
+                ctx.SaveChanges();
+            }
+
+            //adding new volunteer to observable collection
+            //in correct city
+            //todo- this should be separated in a function
+            if (!VolunteersDict.ContainsKey(volunteer.City))
+            {
+                VolunteersDict[volunteer.City] = 
+                    new ObservableCollection<Volunteer>();
+            }
+            VolunteersDict[volunteer.City].Add(volunteer);
+
         }
-        public void CreateStudent(Student student)
+
+        public void AddStudent(Student student)
         {
-            dbManager.InsertIntoStudents(student);
-            GetAllData();
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Students.Add(student);
+                ctx.SaveChanges();
+            }
+
+            //adding new volunteer to observable collection
+            StudentsDict[student.City].Add(student);
+
+        }
+
+        public List<Student> GetVolunteerStudents(Volunteer volunteer)
+        {
+            List<Student> students = new List<Student>();
+
+            using (var ctx = new PeopleContext())
+            {
+                List<Volunteer> volunteers = ctx.Volunteers
+                    .Where(v => v.VolunteerId == volunteer.VolunteerId)
+                    .Include(e => e.VolunteerStudents)
+                    .ThenInclude(e => e.Student)
+                    .ToList();
+
+                students =
+                  volunteers.First().VolunteerStudents
+                  .Select(e => e.Student)
+                  .ToList();
+            }
+            return students;
         }
     }
 }

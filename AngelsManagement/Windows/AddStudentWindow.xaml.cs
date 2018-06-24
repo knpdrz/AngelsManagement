@@ -1,4 +1,4 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +58,7 @@ namespace AngelsManagement
 
         private void AddStudent(Student student)
         {
-            dataManager.CreateStudent(student);
+            dataManager.AddStudent(student);
         }
 
         private bool IsInputValid()//todo validation

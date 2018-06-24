@@ -1,5 +1,6 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
 using AngelsManagement.Windows;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,9 +32,40 @@ namespace AngelsManagement
         public MainWindow()
         {
             InitializeComponent();
-
-            PrepareEverything();
             
+            PrepareEverything();
+
+        }
+
+        private void InitializeFromEF()
+        {
+            TabItem tabItem;
+            DataGrid dataGrid;
+
+            string city = "Gdansk";
+            //for each city create a TabItem
+            tabItem = new TabItem();
+            tabItem.Header = city;
+
+            //add that tab item to students TabControl 
+            StudentsTabControl.Items.Add(tabItem);
+
+            //create DataGrid for students from that particular city
+            dataGrid = new DataGrid();
+            dataGrid.IsReadOnly = true;
+
+            using(var ctx = new PeopleContext())
+            {
+                var volos = ctx.Volunteers
+                    .Where(v => v.City.Equals(city)).ToList();
+                //Console.WriteLine("-----" + volos.Count());
+                
+                dataGrid.ItemsSource = volos;
+
+            }
+
+            //attach that datagrid to its city tab
+            tabItem.Content = dataGrid;
         }
 
         private void PrepareEverything()
@@ -46,41 +78,46 @@ namespace AngelsManagement
         {
             InitializeVolunteersTab();
             InitializeStudentsTab();
-            //manage parents tab        
+            InitializeParentsTab();
         }
 
-        private void InitializeVolunteersTab()
+        private void InitializeVolunteersTab()//todo- refactor- code duplication
         {
             TabItem tabItem;
             DataGrid dataGrid;
 
+            String[] cities = dataManager.Cities;
             //manage volunteers tab (called VolunteersTabControl, has tabs with all cities)
             Dictionary<String, ObservableCollection<Volunteer>> volunteersDict = 
                 dataManager.VolunteersDict;
 
-            foreach(KeyValuePair<String, ObservableCollection<Volunteer>> cityCollection in volunteersDict)
+            foreach(string city in cities)
             {
-                //for each city create a TabItem
-                tabItem = new TabItem();
-                tabItem.Header = cityCollection.Key;
+                if (volunteersDict.ContainsKey(city))
+                {
+                    //for each city that has volunteers create a TabItem
+                    tabItem = new TabItem();
+                    tabItem.Header = city;
 
-                //add that tab item to volunteers TabControl 
-                VolunteersTabControl.Items.Add(tabItem);
+                    //add that tab item to volunteers TabControl 
+                    VolunteersTabControl.Items.Add(tabItem);
 
-                //create DataGrid for volunteers from that particular city
-                dataGrid = new DataGrid();
-                dataGrid.IsReadOnly = true;
-                dataGrid.ItemsSource = cityCollection.Value;
+                    //create DataGrid for volunteers from that particular city
+                    dataGrid = new DataGrid();
+                    dataGrid.IsReadOnly = true;
+                    dataGrid.ItemsSource = volunteersDict[city];
 
-                //adding double-click event to volunteers datagrid
-                //if user double clicks a row, VolunteerRow_DoubleClick will be called
-                Style rowStyle = new Style(typeof(DataGridRow));
-                rowStyle.Setters.Add(new EventSetter(DataGridRow.MouseDoubleClickEvent,
-                                         new MouseButtonEventHandler(VolunteerRow_DoubleClick)));
-                dataGrid.RowStyle = rowStyle;
+                    //adding double-click event to volunteers datagrid
+                    //if user double clicks a row, VolunteerRow_DoubleClick will be called
+                    Style rowStyle = new Style(typeof(DataGridRow));
+                    rowStyle.Setters.Add(new EventSetter(MouseDoubleClickEvent,
+                                             new MouseButtonEventHandler(VolunteerRow_DoubleClick)));
+                    dataGrid.RowStyle = rowStyle;
 
-                //attach that datagrid to its city tab
-                tabItem.Content = dataGrid;
+                    //attach that datagrid to its city tab
+                    tabItem.Content = dataGrid;
+                }
+                
             }
         }
 
@@ -100,30 +137,66 @@ namespace AngelsManagement
             TabItem tabItem;
             DataGrid dataGrid;
 
+            String[] cities = dataManager.Cities;
+
             //manage students tab (called StudentsTabControl, has tabs with all cities)
             Dictionary<String, ObservableCollection<Student>> studentsDict =
                 dataManager.StudentsDict;
 
-            foreach (KeyValuePair<String, ObservableCollection<Student>> cityCollection in studentsDict)
+            foreach (string city in cities)
             {
-                //for each city create a TabItem
-                tabItem = new TabItem();
-                tabItem.Header = cityCollection.Key;
+                if (studentsDict.ContainsKey(city))
+                {
+                    //for each city create a TabItem
+                    tabItem = new TabItem();
+                    tabItem.Header = city;
 
-                //add that tab item to students TabControl 
-                StudentsTabControl.Items.Add(tabItem);
+                    //add that tab item to students TabControl 
+                    StudentsTabControl.Items.Add(tabItem);
 
-                //create DataGrid for students from that particular city
-                dataGrid = new DataGrid();
-                dataGrid.IsReadOnly = true;
-                dataGrid.ItemsSource = cityCollection.Value;
-               
-                //attach that datagrid to its city tab
-                tabItem.Content = dataGrid;
+                    //create DataGrid for students from that particular city
+                    dataGrid = new DataGrid();
+                    dataGrid.IsReadOnly = true;
+                    dataGrid.ItemsSource = studentsDict[city];
+
+                    //attach that datagrid to its city tab
+                    tabItem.Content = dataGrid;
+                }
             }
         }
 
+        private void InitializeParentsTab()
+        {
+            TabItem tabItem;
+            DataGrid dataGrid;
 
+            String[] cities = dataManager.Cities;
+
+            //manage students tab (called ParentsTabControl, has tabs with all cities)
+            Dictionary<String, ObservableCollection<Parent>> parentsDict =
+                dataManager.ParentsDict;
+
+            foreach (string city in cities)
+            {
+                if (parentsDict.ContainsKey(city))
+                {
+                    //for each city create a TabItem
+                    tabItem = new TabItem();
+                    tabItem.Header = city;
+
+                    //add that tab item to parents TabControl 
+                    ParentsTabControl.Items.Add(tabItem);
+
+                    //create DataGrid for students from that particular city
+                    dataGrid = new DataGrid();
+                    dataGrid.IsReadOnly = true;
+                    dataGrid.ItemsSource = parentsDict[city];
+
+                    //attach that datagrid to its city tab
+                    tabItem.Content = dataGrid;
+                }
+            }
+        }
 
         private void OnAddVolunteerButtonClick(object sender, RoutedEventArgs e)
         {
@@ -132,7 +205,8 @@ namespace AngelsManagement
         }
         private void OnAddStudentButtonClick(object sender, RoutedEventArgs e)
         {
-            AddStudentWindow addStudentWindow = new AddStudentWindow(dataManager);
+            AddStudentWindow addStudentWindow = 
+                new AddStudentWindow(dataManager);
             addStudentWindow.Show();
         }
     }

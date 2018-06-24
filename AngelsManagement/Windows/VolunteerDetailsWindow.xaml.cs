@@ -1,4 +1,4 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +40,9 @@ namespace AngelsManagement.Windows
             LastNameTextBox.Text = volunteer.LastName;
             BirthYearTextBox.Text = volunteer.BirthYear.ToString();
             CityComboBox.SelectedItem = volunteer.City;
+
+            var volunteerStudents = dataManager.GetVolunteerStudents(volunteer);
+            StudentsDataGrid.ItemsSource = volunteerStudents;
         }
     }
 }

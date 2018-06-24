@@ -1,4 +1,4 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +54,7 @@ namespace AngelsManagement
 
         private void AddVolunteer(Volunteer volunteer)
         {
-            dataManager.CreateVolunteer(volunteer);
+            dataManager.AddVolunteer(volunteer);
         }
 
         private bool IsInputValid()//todo validation

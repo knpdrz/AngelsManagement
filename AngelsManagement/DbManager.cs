@@ -1,4 +1,4 @@
-﻿using AngelsManagement.DataModels;
+﻿using AngelsManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -149,7 +149,7 @@ namespace AngelsManagement
 
                             volunteers.Add(new Volunteer
                             {
-                                ID = id,
+                               // ID = id,
                                 FirstName = fName,
                                 LastName = lName,
                                 BirthYear = bYear,
@@ -193,7 +193,7 @@ namespace AngelsManagement
 
                             students.Add(new Student
                             {
-                                ID = id,
+                               // ID = id,
                                 FirstName = fName,
                                 LastName = lName,
                                 BirthYear = bYear,

@@ -13,7 +13,7 @@ namespace AngelsManagement
 
         public static string dbFileName = "dbFile.db";
         public static string dbFilePath = appDataFolderPath + "\\" + dbFileName;
-        public static string connectionString = "Data source=" + dbFilePath + ";Version=3";
+        public static string connectionString = "Data source=" + dbFilePath;
 
     }
 }

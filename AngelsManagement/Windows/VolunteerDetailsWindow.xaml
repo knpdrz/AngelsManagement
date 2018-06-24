@@ -40,7 +40,9 @@
 
             <Label Grid.Row="4">Podopieczni</Label>
             <DataGrid x:Name="StudentsDataGrid" Grid.Row="4" Grid.Column="1" 
-                      HorizontalAlignment="Center" Height="100" Margin="5,5,0,10"  VerticalAlignment="Bottom" Width="300"/>
+                      HorizontalAlignment="Center" Height="100" Margin="5,5,0,10"  
+                      VerticalAlignment="Bottom" Width="300"
+                      IsReadOnly="True"/>
 
         </Grid>
 
