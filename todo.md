@@ -2,7 +2,6 @@ Angels Management
 ==
 
 # Todo
-- [ ] Dodawanie miast
 - [ ] Hasło na wejście aplikacji
     - [ ] Możliwość zmiany hasła
 - [ ] Responsywność formularzy
@@ -10,7 +9,7 @@ Angels Management
     - [ ] wolontariuszy
     - [ ] podopiecznych
     - [ ] rodziców
-> W zamyśle, niczym w profesjonalnych narzędziach, każdy ma sobie przekleić stąd funkcjonalność, nad którą pracuje ;)
+
 
 ## Monika
 - [x] Konstrukcja bazy
@@ -26,6 +25,7 @@ Angels Management
 
 
 ## Mikołaj
+- [ ] Dodawanie miast
 
 # Bugi
 
@@ -35,6 +35,8 @@ Angels Management
 :grey_question: Logowanie zamiast globalnego hasła. Użytkownik zwykły może tylko przeglądać, Administrator może dodawać/usuwać
 
 :grey_question: Możliwość dodawania/usuwania kolumn przez użytkownika (np. załóżmy, że będą chcieli, żeby wolontariusze podawali zainteresowania czy coś tam). Najłatwiej chyba dokonywać małoinwazyjnego `ALTER TABLE` po zmianach. Można też bardziej "elegancko" (?) czyli podzielić na 2 tabele np. `VolunteersColumns` i `VolunteersData`, tylko trzeba by rozwiązać problem z typami danych
+
+:grey_question: Ustawienia, możliwość zmiany hasła itp.
 
 # Problemy
 
