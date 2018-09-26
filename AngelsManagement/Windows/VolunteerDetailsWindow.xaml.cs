@@ -42,7 +42,15 @@ namespace AngelsManagement.Windows
             BirthYearTextBox.Text = volunteer.BirthYear.ToString();
             EmailTextBox.Text = volunteer.Email;
             AddressTextBox.Text = volunteer.Address;
-            CityComboBox.SelectedItem = volunteer.City;
+
+            //set city in combobox
+            foreach(ComboBoxItem item in CityComboBox.Items)
+            {
+                if (item.Content.ToString().Equals(volunteer.City))
+                {
+                    item.IsSelected = true;
+                }
+            }
 
             UpdateStudentsList();
         }

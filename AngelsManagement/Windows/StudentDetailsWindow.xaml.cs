@@ -40,8 +40,14 @@ namespace AngelsManagement.Windows
             LastNameTextBox.Text = student.LastName;
             BirthYearTextBox.Text = student.BirthYear.ToString();
             SchoolTextBox.Text = student.School;
-            CityComboBox.SelectedItem = student.City;
-
+            //set city in combobox
+            foreach (ComboBoxItem item in CityComboBox.Items)
+            {
+                if (item.Content.ToString().Equals(student.City))
+                {
+                    item.IsSelected = true;
+                }
+            }
             UpdateGuardiansList();
         }
 
