@@ -41,10 +41,11 @@ namespace AngelsManagement.Managers
             col.Binding = new Binding(bindingName);
             dataGrid.Columns.Add(col);
         }
-        
-        private DataGrid CreateDataGrid(IEnumerable<object> itemsSource, 
+
+        private DataGrid CreateDataGrid(IEnumerable<object> itemsSource,
             Dictionary<String, String> columnNames,
-            MouseButtonEventHandler mouseButtonEventHandler)
+            MouseButtonEventHandler doubleClickMouseButtonEventHandler,
+            MouseButtonEventHandler rightClickMouseButtonEventHandler)
         {
             DataGrid dataGrid = new DataGrid
             {
@@ -57,28 +58,40 @@ namespace AngelsManagement.Managers
             //and giving them names taken from columnNames dictionary
             //entries in the dictionary are in form 
             //<column name to be displayed, column name in the db>
-            foreach(var columnName in columnNames)
+            foreach (var columnName in columnNames)
             {
                 AddColumnWithBinding(columnName.Key, columnName.Value, dataGrid);
             }
 
-            if (mouseButtonEventHandler != null)
+            Style rowStyle = new Style(typeof(DataGridRow));
+
+            if (doubleClickMouseButtonEventHandler != null)
             {
                 //adding double-click event to the datagrid
-                //if user double clicks a row, mouseButtonEventHandler will be called
-                Style rowStyle = new Style(typeof(DataGridRow));
+                //if user double clicks a row, doubleClickMouseButtonEventHandler will be called
                 rowStyle.Setters.Add(new EventSetter(Window.MouseDoubleClickEvent,
-                                         new MouseButtonEventHandler(mouseButtonEventHandler)));
-                dataGrid.RowStyle = rowStyle;
+                                         new MouseButtonEventHandler(doubleClickMouseButtonEventHandler)));
             }
+
+            if (rightClickMouseButtonEventHandler != null)
+            {
+                //adding right-click event to the datagrid
+                //if user right clicks a row, rightClickMouseButtonEventHandler will be called
+                rowStyle.Setters.Add(new EventSetter(Window.MouseRightButtonDownEvent,
+                                         new MouseButtonEventHandler(rightClickMouseButtonEventHandler)));
+            }
+
+            dataGrid.RowStyle = rowStyle;
+
             return dataGrid;
         }
 
-        
+
 
         private void CreateCityTab(TabControl tabControl, IEnumerable<object> itemsSource,
-            String city, Dictionary<String, String> columnNames, 
-            MouseButtonEventHandler mouseButtonEventHandler)
+            String city, Dictionary<String, String> columnNames,
+            MouseButtonEventHandler doubleClickMouseButtonEventHandler,
+            MouseButtonEventHandler rightClickMouseButtonHandler)
         {
             //for a city create a TabItem
             TabItem tabItem = new TabItem();
@@ -88,8 +101,9 @@ namespace AngelsManagement.Managers
             tabControl.Items.Add(tabItem);
 
             //attach created datagrid to its city tab
-            DataGrid dataGrid = CreateDataGrid(itemsSource, 
-                columnNames, mouseButtonEventHandler);
+            DataGrid dataGrid = CreateDataGrid(itemsSource,
+                columnNames, doubleClickMouseButtonEventHandler,
+                rightClickMouseButtonHandler);
             tabItem.Content = dataGrid;
         }
 
@@ -103,9 +117,9 @@ namespace AngelsManagement.Managers
             {
                 if (volunteersDict.ContainsKey(city))
                 {
-                    CreateCityTab(window.VolunteersTabControl, 
+                    CreateCityTab(window.VolunteersTabControl,
                         volunteersDict[city], city, VolunteersColumnNamesBindings,
-                        VolunteerRow_DoubleClick);
+                        VolunteerRow_DoubleClick, VolunteerRow_RightClick);
                 }
             }
         }
@@ -121,6 +135,15 @@ namespace AngelsManagement.Managers
             volunteerDetailsWindow.Show();
         }
 
+        private void VolunteerRow_RightClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Volunteer doubleClickedVolunteer = (Volunteer)row.Item;
+
+            //showing options for double-clicked volunteer
+
+        }
+
         private void InitializeStudentsTab()
         {
             //manage students tab (called StudentsTabControl, has tabs with all cities)
@@ -133,7 +156,7 @@ namespace AngelsManagement.Managers
                 {
                     CreateCityTab(window.StudentsTabControl,
                         studentsDict[city], city, StudentsColumnNamesBindings,
-                        StudentRow_DoubleClick);
+                        StudentRow_DoubleClick, StudentRow_RightClick);
                 }
             }
         }
@@ -148,6 +171,14 @@ namespace AngelsManagement.Managers
                 new StudentDetailsWindow(dataManager, doubleClickedStudent);
             studentDetailsWindow.Show();
         }
+        private void StudentRow_RightClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Student doubleClickedStudent = (Student)row.Item;
+
+            //showing options for double-clicked student
+
+        }
 
         private void InitializeGuardiansTab()
         {
@@ -161,7 +192,7 @@ namespace AngelsManagement.Managers
                 {
                     CreateCityTab(window.guardiansTabControl,
                         guardiansDict[city], city, GuardiansColumnNamesBindings,
-                        GuardianRow_DoubleClick);
+                        GuardianRow_DoubleClick, GuardianRow_RightClick);
                 }
             }
         }
@@ -176,5 +207,29 @@ namespace AngelsManagement.Managers
                 new GuardianDetailsWindow(dataManager, doubleClickedGuardian);
             guardianDetailsWindow.Show();
         }
+
+        private void GuardianRow_RightClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Guardian rightClickedGuardian = (Guardian)row.Item;
+
+            //showing options for double-clicked guardian
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem item = new MenuItem
+            {
+                Header = "Delete"
+            };
+            item.Click += new RoutedEventHandler(DeleteGuardian);
+            contextMenu.Items.Add(item);
+
+            contextMenu.IsOpen = true;
+        }
+
+        private void DeleteGuardian(object sender, RoutedEventArgs e)
+        {
+            //todo- get guardian data, delete guardian
+            Console.WriteLine("deleting guardian");
+        }
+
     }
 }
