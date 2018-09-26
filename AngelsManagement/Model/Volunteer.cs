@@ -35,7 +35,7 @@ namespace AngelsManagement.Model
         //returns a list of string explanations of why were some/all 
         //input fields invalid (while getting data to create volunteer object)
         public static List<String> FindVolunteerValidationErrors(string firstName,
-            string lastName, string birthYear, string email, string address)
+            string lastName, string birthYear, string address, string email)
         {
             List<String> errorReason = new List<string>();
 
@@ -79,11 +79,22 @@ namespace AngelsManagement.Model
             Email = email;
         }
 
-
+        public Volunteer(long volunteerId, string firstName, string lastName, 
+            string birthYear, string city, string address, string email)
+        {
+            VolunteerId = volunteerId;
+            //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
+            FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+            LastName = new String(lastName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+            BirthYear = Int64.Parse(birthYear);
+            City = city;//todo to enum?
+            Address = address;
+            Email = email;
+        }
 
         //constructor that takes user input and parses it accordingly
         public Volunteer(string firstName,
-            string lastName, string birthYear, string email, string city, string address)
+            string lastName, string birthYear, string city, string address, string email)
         {
             //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
             FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static AngelsManagement.Globals;
 
 namespace AngelsManagement.Windows
 {
@@ -58,6 +59,43 @@ namespace AngelsManagement.Windows
         {
             var volunteerStudents = dataManager.GetVolunteerStudents(volunteer);
             StudentsDataGrid.ItemsSource = volunteerStudents;
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //get data from the form
+            string firstName = FirstNameTextBox.Text;
+            string lastName = LastNameTextBox.Text;
+            string birthYear = BirthYearTextBox.Text;
+            string email = "a@a.com";//todo EmailTextBox.Text;
+            string address = "todo! address"; //todo AddressTextBox.Text;
+            string city = ((ComboBoxItem)CityComboBox.SelectedItem).Content.ToString();
+
+            List<String> errorsList =
+                Volunteer.FindVolunteerValidationErrors(
+                    firstName, lastName, birthYear, address, email);
+
+            if (errorsList.Count() == 0)//if there are no errors
+            {
+                Volunteer updatedVolunteer = new Volunteer(volunteer.VolunteerId, firstName,
+                    lastName, birthYear, city, address, email);
+                UpdateVolunteer(updatedVolunteer);
+
+            }
+            else
+            {
+                //show dialog with information which data were incorrect
+                var errorString = String.Join("\n", errorsList.ToArray());
+                MessageBoxResult result = System.Windows.MessageBox.Show(errorString,
+                        ErrorText,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateVolunteer(Volunteer updatedVolunteer)
+        {
+            dataManager.UpdateVolunteer(volunteer.City, updatedVolunteer);
         }
     }
 }

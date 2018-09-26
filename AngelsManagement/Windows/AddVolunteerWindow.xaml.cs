@@ -39,12 +39,12 @@ namespace AngelsManagement
 
             List<String> errorsList =
                 Volunteer.FindVolunteerValidationErrors(
-                    firstName, lastName, birthYear, email, address);
+                    firstName, lastName, birthYear, address, email);
 
             if (errorsList.Count() == 0)//if there are no errors
             {
                 Volunteer volunteer = new Volunteer(firstName, 
-                    lastName, birthYear,email, city, address);
+                    lastName, birthYear, city, address, email);
                 AddVolunteer(volunteer);
 
             }

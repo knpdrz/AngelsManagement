@@ -166,6 +166,25 @@ namespace AngelsManagement
             VolunteersDict[volunteer.City].Add(volunteer);
 
         }
+        public void UpdateVolunteer(string oldVolunteersCity, Volunteer updatedVolunteer)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Volunteers.Update(updatedVolunteer);
+                ctx.SaveChanges();
+            }
+
+            //update volunteer in observable collection
+            //in correct city
+
+            //remove volunteer with outdated info from observable collection
+            var oldVolunteer = VolunteersDict[oldVolunteersCity]
+                .FirstOrDefault(v => v.VolunteerId == updatedVolunteer.VolunteerId);
+            VolunteersDict[oldVolunteersCity].Remove(oldVolunteer);
+
+            //add volunteer to observable collection of their current city
+            VolunteersDict[updatedVolunteer.City].Add(updatedVolunteer);
+        }
 
         public void AddStudent(Student student)
         {
