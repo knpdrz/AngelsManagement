@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static AngelsManagement.Globals;
 
 namespace AngelsManagement.Windows
 {
@@ -40,6 +41,7 @@ namespace AngelsManagement.Windows
             LastNameTextBox.Text = student.LastName;
             BirthYearTextBox.Text = student.BirthYear.ToString();
             SchoolTextBox.Text = student.School;
+
             //set city in combobox
             foreach (ComboBoxItem item in CityComboBox.Items)
             {
@@ -65,6 +67,42 @@ namespace AngelsManagement.Windows
             //make this window unclickable
             IsEnabled = false;
             addStudentToVWindow.Show();
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //get data from the form
+            string firstName = FirstNameTextBox.Text;
+            string lastName = LastNameTextBox.Text;
+            string birthYear = BirthYearTextBox.Text;
+            string city = ((ComboBoxItem)CityComboBox.SelectedItem).Content.ToString();
+            string school = SchoolTextBox.Text;
+
+            List<String> errorsList =
+               Student.FindStudentValidationErrors(firstName, lastName,
+               birthYear, school);
+
+            if (errorsList.Count() == 0)//if there are no errors
+            {
+                Student updatedStudent = new Student(student.StudentId, firstName,
+                                    lastName, birthYear, city, school);
+                UpdateStudent(updatedStudent);
+
+            }
+            else
+            {
+                //show dialog with information which data were incorrect
+                var errorString = String.Join("\n", errorsList.ToArray());
+                MessageBoxResult result = System.Windows.MessageBox.Show(errorString,
+                        ErrorText,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateStudent(Student updatedStudent)
+        {
+            dataManager.UpdateStudent(student.City, updatedStudent);
         }
     }
 }

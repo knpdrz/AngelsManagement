@@ -75,11 +75,19 @@ namespace AngelsManagement.Model
             School = school;
         }
 
-
+        public Student(long studentId, string firstName, string lastName, string birthYear, string city, string school)
+        {
+            StudentId = studentId;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthYear = Int64.Parse(birthYear);
+            City = city;
+            School = school;
+        }
 
         //constructor that takes user input and parses it accordingly
         public Student(string firstName, string lastName, 
-            string birthYear, string school, string city)
+            string birthYear, string city, string school)
         {
             //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
             FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());

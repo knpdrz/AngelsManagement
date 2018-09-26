@@ -199,6 +199,26 @@ namespace AngelsManagement
 
         }
 
+        public void UpdateStudent(string oldStudentsCity, Student updatedStudent)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Students.Update(updatedStudent);
+                ctx.SaveChanges();
+            }
+
+            //update student in observable collection
+            //in correct city
+
+            //remove student with outdated info from observable collection
+            var oldStudent = StudentsDict[oldStudentsCity]
+                .FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
+            StudentsDict[oldStudentsCity].Remove(oldStudent);
+
+            //add student to observable collection of their current city
+            StudentsDict[updatedStudent.City].Add(updatedStudent);
+        }
+
         //returns a list of students that volunteer from parameter has
         public List<Student> GetVolunteerStudents(Volunteer volunteer)
         {

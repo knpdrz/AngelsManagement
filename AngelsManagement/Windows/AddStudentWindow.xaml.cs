@@ -34,8 +34,7 @@ namespace AngelsManagement
         {
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
-            string birthYearString = BirthYearTextBox.Text;
-            string birthYear = birthYearString;
+            string birthYear = BirthYearTextBox.Text;
             string city = ((ComboBoxItem)CityComboBox.SelectedItem).Content.ToString();
             string school = SchoolTextBox.Text;
 
@@ -46,7 +45,7 @@ namespace AngelsManagement
             if (errorsList.Count() == 0)//if there are no errors
             {
                 Student student = new Student(firstName,
-                                    lastName, birthYear, school, city);
+                                    lastName, birthYear, city, school);
                 AddStudent(student);
 
             }
