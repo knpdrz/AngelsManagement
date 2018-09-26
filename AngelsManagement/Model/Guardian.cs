@@ -71,5 +71,18 @@ namespace AngelsManagement.Model
 
             City = city;//todo is it worth changing to enum?
         }
+
+        public Guardian(long guardianId, string firstName,
+            string lastName, string phoneNumber, string city)
+        {
+            GuardianId = guardianId;
+            //based on: https://stackoverflow.com/questions/4427483/how-to-lowercase-a-string-except-for-first-character-with-c-sharp
+            FirstName = new String(firstName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+            LastName = new String(lastName.Select((ch, index) => (index == 0) ? ch : Char.ToLower(ch)).ToArray());
+
+            PhoneNumber = phoneNumber;
+
+            City = city;//todo is it worth changing to enum?
+        }
     }
 }

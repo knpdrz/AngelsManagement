@@ -186,6 +186,9 @@
     <Compile Include="Windows\StudentDetailsWindow.xaml.cs">
       <DependentUpon>StudentDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\GuardianDetailsWindow.xaml.cs">
+      <DependentUpon>GuardianDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\VolunteerDetailsWindow.xaml.cs">
       <DependentUpon>VolunteerDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\StudentDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\GuardianDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

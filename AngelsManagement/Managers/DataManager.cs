@@ -219,6 +219,26 @@ namespace AngelsManagement
             StudentsDict[updatedStudent.City].Add(updatedStudent);
         }
 
+        public void UpdateGuardian(string oldGuardianCity, Guardian updatedGuardian)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Guardians.Update(updatedGuardian);
+                ctx.SaveChanges();
+            }
+
+            //update guardian in observable collection
+            //in correct city
+
+            //remove guardian with outdated info from observable collection
+            var oldGuardian = GuardiansDict[oldGuardianCity]
+                .FirstOrDefault(g => g.GuardianId == updatedGuardian.GuardianId);
+            GuardiansDict[oldGuardianCity].Remove(oldGuardian);
+
+            //add guardian to observable collection of their current city
+            GuardiansDict[updatedGuardian.City].Add(updatedGuardian);
+        }
+
         //returns a list of students that volunteer from parameter has
         public List<Student> GetVolunteerStudents(Volunteer volunteer)
         {
@@ -261,6 +281,30 @@ namespace AngelsManagement
            
             return notVolunteersStudents;
         }
+
+        //returns a list of students that guardian from parameter has
+        public List<Student> GetGuardianStudents(Guardian guardian)
+        {
+            List<Student> students = new List<Student>();
+
+            using (var ctx = new PeopleContext())
+            {
+                //get guardian by id
+                List<Guardian> guardians = ctx.Guardians
+                    .Where(g => g.GuardianId == guardian.GuardianId)
+                    .Include(e => e.StudentGuardians)
+                    .ThenInclude(e => e.Student)
+                    .ToList();
+
+                //get students of that volunteer
+                students =
+                  guardians.First().StudentGuardians
+                  .Select(e => e.Student)
+                  .ToList();
+            }
+            return students;
+        }
+
 
         //creates entities <volunteerId, studentId> in the database
         //that represent many to many relationship between students and volunteers

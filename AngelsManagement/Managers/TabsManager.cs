@@ -31,7 +31,7 @@ namespace AngelsManagement.Managers
         {
             InitializeVolunteersTab();
             InitializeStudentsTab();
-            InitializeguardiansTab();
+            InitializeGuardiansTab();
         }
 
         private void AddColumnWithBinding(string header, string bindingName, DataGrid dataGrid)
@@ -143,13 +143,13 @@ namespace AngelsManagement.Managers
             DataGridRow row = sender as DataGridRow;
             Student doubleClickedStudent = (Student)row.Item;
 
-            //showing details of doubleclicked student
+            //showing details of double-clicked student
             StudentDetailsWindow studentDetailsWindow =
                 new StudentDetailsWindow(dataManager, doubleClickedStudent);
             studentDetailsWindow.Show();
         }
 
-        private void InitializeguardiansTab()
+        private void InitializeGuardiansTab()
         {
             //manage students tab (called guardiansTabControl, has tabs with all cities)
             Dictionary<String, ObservableCollection<Guardian>> guardiansDict =
@@ -161,9 +161,20 @@ namespace AngelsManagement.Managers
                 {
                     CreateCityTab(window.guardiansTabControl,
                         guardiansDict[city], city, GuardiansColumnNamesBindings,
-                        null);
+                        GuardianRow_DoubleClick);
                 }
             }
+        }
+
+        private void GuardianRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Guardian doubleClickedGuardian = (Guardian)row.Item;
+
+            //showing details of double-clicked guardian
+            GuardianDetailsWindow guardianDetailsWindow =
+                new GuardianDetailsWindow(dataManager, doubleClickedGuardian);
+            guardianDetailsWindow.Show();
         }
     }
 }
