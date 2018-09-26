@@ -40,6 +40,8 @@ namespace AngelsManagement.Windows
             FirstNameTextBox.Text = volunteer.FirstName;
             LastNameTextBox.Text = volunteer.LastName;
             BirthYearTextBox.Text = volunteer.BirthYear.ToString();
+            EmailTextBox.Text = volunteer.Email;
+            AddressTextBox.Text = volunteer.Address;
             CityComboBox.SelectedItem = volunteer.City;
 
             UpdateStudentsList();
@@ -67,8 +69,8 @@ namespace AngelsManagement.Windows
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
             string birthYear = BirthYearTextBox.Text;
-            string email = "a@a.com";//todo EmailTextBox.Text;
-            string address = "todo! address"; //todo AddressTextBox.Text;
+            string email = EmailTextBox.Text;
+            string address = AddressTextBox.Text;
             string city = ((ComboBoxItem)CityComboBox.SelectedItem).Content.ToString();
 
             List<String> errorsList =
@@ -80,7 +82,6 @@ namespace AngelsManagement.Windows
                 Volunteer updatedVolunteer = new Volunteer(volunteer.VolunteerId, firstName,
                     lastName, birthYear, city, address, email);
                 UpdateVolunteer(updatedVolunteer);
-
             }
             else
             {
