@@ -7,34 +7,26 @@ using System.Threading.Tasks;
 using static AngelsManagement.Globals;
 namespace AngelsManagement.Managers
 {
-    public class LoginManager
+    public class UserCredentialsValidationManager
     {
         private readonly string Login;
         private readonly string Password;
-        private UserManager usersManager;
 
         private List<String> ValidationErrorReason = new List<string>();
         public bool ValidationOk;
 
-        public LoginManager(string login, string password)
-        {
-            PrepareUsersManager();
+        public bool IsNewUser { get; set; }//flag indicating that user doesn't exist yet (and we're trying to create them after this validation)
 
-            //usersManager.CreateUser(login, password);
-
+        public UserCredentialsValidationManager(string login, string password, bool isNewUser)
+        {            
             Login = login;
             Password = password;
+            IsNewUser = isNewUser;
 
             ValidationErrorReason = new List<string>();
             ValidationOk = false;
 
             ValidateUser();
-        }
-
-        private void PrepareUsersManager()
-        {
-            usersManager = new UserManager();
-            usersManager.PrepareDatabase();
         }
 
         private void ValidateUser()
@@ -52,19 +44,38 @@ namespace AngelsManagement.Managers
                 return;
             }
 
-            if (CheckLoginPasswordMatch())
+            if (IsNewUser)
             {
-                ValidationOk = true;
+                if (UserManager.LoginExistsInDb(Login))
+                {
+                    ValidationErrorReason.Clear();
+                    ValidationErrorReason.Add(UserAlreadyExistsErrorText);
+                }
+                else
+                {
+                    ValidationOk = true;
+                    ValidationErrorReason.Clear();
+                }
+                return;
             }
             else
             {
-                ValidationErrorReason.Add(WrongLoginOrPasswordErrorText);
+                if (CheckLoginPasswordMatch())
+                {
+                    ValidationOk = true;
+                    ValidationErrorReason.Clear();
+                }
+                else
+                {
+                    ValidationErrorReason.Clear();
+                    ValidationErrorReason.Add(WrongLoginOrPasswordErrorText);
+                }
             }
         }
 
         private bool CheckLoginPasswordMatch()
         {
-            return usersManager.CanUserLogin(Login, Password);
+            return UserManager.CanUserLogin(Login, Password);
         }
 
         public string GetValidationErrorString()

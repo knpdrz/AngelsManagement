@@ -13,6 +13,7 @@
                     <MenuItem Header="Dodaj wolontariusza" Click="OnAddVolunteerButtonClick"/>
                     <MenuItem Header="Dodaj podopiecznego" Click="OnAddStudentButtonClick"/>
                 </MenuItem>
+                <MenuItem Header="Utwórz użytkownika" Click="OnCreateNewUserButtonClick"/>
             </Menu>
         </DockPanel>
 

@@ -196,6 +196,9 @@
     <Compile Include="Windows\AddStudentToVWindow.xaml.cs">
       <DependentUpon>AddStudentToVWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\CreateUserWindow.xaml.cs">
+      <DependentUpon>CreateUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
     <Page Include="Windows\AddVolunteerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CreateUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>

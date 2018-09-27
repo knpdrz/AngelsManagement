@@ -21,37 +21,41 @@ using static AngelsManagement.Globals;
 namespace AngelsManagement.Windows
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for CreateUserWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class CreateUserWindow : Window
     {
-        public LoginWindow()
+        public CreateUserWindow()
         {
             InitializeComponent();
             LoginTextBox.Focus();
-
         }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        
+        private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
-            UserCredentialsValidationManager userCredentialsValidationManager = 
-                new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password, false);
+            UserCredentialsValidationManager userCredentialsValidationManager =
+                new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password, true);
+
             if (userCredentialsValidationManager.ValidationOk)
             {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                //create new user
+                UserManager.CreateUser(LoginTextBox.Text, PasswordBox.Password);
 
+                //show dialog with success info
+                MessageBoxResult result = MessageBox.Show(UserSuccessfullyCreatedText,
+                        SuccessText,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                 Close();
             }
             else
             {
                 //show dialog with information which data were incorrect
-                MessageBoxResult result = System.Windows.MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
+                MessageBoxResult result = MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
                         ErrorText,
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
             }
-
         }
     }
 }

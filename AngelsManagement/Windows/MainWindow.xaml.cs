@@ -1,4 +1,5 @@
 ﻿using AngelsManagement.Managers;
+using AngelsManagement.Windows;
 using System.Windows;
 
 namespace AngelsManagement
@@ -35,6 +36,10 @@ namespace AngelsManagement
             addStudentWindow.Show();
         }
 
-
+        private void OnCreateNewUserButtonClick(object sender, RoutedEventArgs e)
+        {
+            CreateUserWindow createUserWindow = new CreateUserWindow();
+            createUserWindow.Show();
+        }
     }
 }

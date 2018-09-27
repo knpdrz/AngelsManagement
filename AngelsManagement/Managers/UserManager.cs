@@ -10,9 +10,10 @@ using static AngelsManagement.Globals;
 
 namespace AngelsManagement.Managers
 {
-    public class UserManager
+    public static class UserManager
     {
-        public void PrepareDatabase()
+
+        public static void PrepareDatabase()
         {
             //create app data directory (do nothing if it already exists)
             Directory.CreateDirectory(appDataFolderPath);
@@ -25,7 +26,7 @@ namespace AngelsManagement.Managers
             }
         }
 
-        public void CreateUser(string login, string password)
+        public static void CreateUser(string login, string password)
         {
             string mySalt = BCrypt.Net.BCrypt.GenerateSalt();
             //hashing password with appended salt
@@ -45,7 +46,7 @@ namespace AngelsManagement.Managers
             }
         }
 
-        public bool CanUserLogin(string login, string submittedPassword)
+        public static bool CanUserLogin(string login, string submittedPassword)
         {
             //get user salt and password
             UserCredentials userCredentials = GetUserCredentialsFromDb(login);
@@ -60,7 +61,7 @@ namespace AngelsManagement.Managers
             return passwordValid;
         }
 
-        private UserCredentials GetUserCredentialsFromDb(string login)
+        private static UserCredentials GetUserCredentialsFromDb(string login)
         {
             UserCredentials userCredentials = null;
             using (var ctx = new UsersContext())
@@ -69,6 +70,22 @@ namespace AngelsManagement.Managers
             }
 
             return userCredentials;
+        }
+
+        public static bool LoginExistsInDb(string login)
+        {
+            bool loginExists = false;
+
+            using (var ctx = new UsersContext())
+            {
+                var userCredentials = ctx.UserCredentials.FirstOrDefault(uc => uc.Login.Equals(login));
+                if(userCredentials != null)
+                {
+                    loginExists = true;
+                }
+            }
+
+            return loginExists;
         }
 
     }
