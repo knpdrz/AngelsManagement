@@ -211,7 +211,7 @@ namespace AngelsManagement.Managers
         private void GuardianRow_RightClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            Guardian rightClickedGuardian = (Guardian)row.Item;
+            rightClickedGuardian = (Guardian)row.Item;
 
             //showing options for double-clicked guardian
             ContextMenu contextMenu = new ContextMenu();
@@ -223,13 +223,16 @@ namespace AngelsManagement.Managers
             contextMenu.Items.Add(item);
 
             contextMenu.IsOpen = true;
+            
         }
+
+        private Guardian rightClickedGuardian;
 
         private void DeleteGuardian(object sender, RoutedEventArgs e)
         {
             //todo- get guardian data, delete guardian
-            Console.WriteLine("deleting guardian");
+            Console.WriteLine("about to delete guardian " + rightClickedGuardian.FirstName);            
+            
         }
-
     }
 }

@@ -79,7 +79,7 @@ namespace AngelsManagement.Windows
             {
                 //show dialog with information which data were incorrect
                 var errorString = String.Join("\n", errorsList.ToArray());
-                MessageBoxResult result = System.Windows.MessageBox.Show(errorString,
+                MessageBoxResult result = MessageBox.Show(errorString,
                         ErrorText,
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
