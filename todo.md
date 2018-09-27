@@ -4,11 +4,11 @@ Angels Management
 # Todo
 - [ ] Hasło na wejście aplikacji
     - [ ] Możliwość zmiany hasła
-- [ ] Responsywność formularzy
-- [ ] Usuwanie:
-    - [ ] wolontariuszy
-    - [ ] podopiecznych
-    - [ ] rodziców
+- [x] Edytowanie wolo, podopiecznych, rodziców
+- [x] Usuwanie:
+    - [x] wolontariuszy
+    - [x] podopiecznych
+    - [x] rodziców
 
 
 ## Monika
