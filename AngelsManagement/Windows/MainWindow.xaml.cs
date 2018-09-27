@@ -15,7 +15,6 @@ namespace AngelsManagement
         {
             InitializeComponent();
             PrepareEverything();
-
         }
         
         private void PrepareEverything()

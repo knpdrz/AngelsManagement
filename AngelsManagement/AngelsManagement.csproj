@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.3.1.0\lib\net462\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -120,6 +123,7 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -169,14 +173,22 @@
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\TabsManager.cs" />
     <Compile Include="Managers\LoginManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\ValidationManager.cs" />
     <Compile Include="Migrations\20180624180527_initial.cs" />
     <Compile Include="Migrations\20180624180527_initial.designer.cs">
       <DependentUpon>20180624180527_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PeopleContextModelSnapshot.cs" />
+    <Compile Include="Migrations\Users\20180927091817_InitialCreateUsers.cs" />
+    <Compile Include="Migrations\Users\20180927091817_InitialCreateUsers.designer.cs">
+      <DependentUpon>20180927091817_InitialCreateUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Users\UsersContextModelSnapshot.cs" />
     <Compile Include="Model\PeopleContext.cs" />
     <Compile Include="Model\StuPar.cs" />
+    <Compile Include="Model\UserCredentials.cs" />
+    <Compile Include="Model\UsersContext.cs" />
     <Compile Include="Model\VolStu.cs" />
     <Compile Include="Windows\AddGuardianToStudentWindow.xaml.cs">
       <DependentUpon>AddGuardianToStudentWindow.xaml</DependentUpon>

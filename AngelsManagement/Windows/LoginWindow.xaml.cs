@@ -1,6 +1,10 @@
 ﻿using AngelsManagement.Managers;
+using AngelsManagement.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +25,13 @@ namespace AngelsManagement.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
+
         public LoginWindow()
         {
             InitializeComponent();
+            LoginTextBox.Focus();
         }
-
+        
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             LoginManager loginManager = new LoginManager(LoginTextBox.Text, PasswordBox.Password);

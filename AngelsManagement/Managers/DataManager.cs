@@ -21,12 +21,12 @@ namespace AngelsManagement
             //create app data directory (it won't if it already exists)
             Directory.CreateDirectory(appDataFolderPath);
 
-            //perform first migration
+            //perform first migration for persons data
             using (PeopleContext context = new PeopleContext())
             {
                 context.Database.Migrate();
-                
             }
+
             CreateDictionaries();
             GetPeopleData();
         }

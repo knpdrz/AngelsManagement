@@ -11,12 +11,17 @@ namespace AngelsManagement.Managers
     {
         private readonly string Login;
         private readonly string Password;
+        private UserManager usersManager;
 
         private List<String> ValidationErrorReason = new List<string>();
         public bool ValidationOk;
 
         public LoginManager(string login, string password)
         {
+            PrepareUsersManager();
+
+            //usersManager.CreateUser(login, password);
+
             Login = login;
             Password = password;
 
@@ -24,6 +29,12 @@ namespace AngelsManagement.Managers
             ValidationOk = false;
 
             ValidateUser();
+        }
+
+        private void PrepareUsersManager()
+        {
+            usersManager = new UserManager();
+            usersManager.PrepareDatabase();
         }
 
         private void ValidateUser()
@@ -53,12 +64,13 @@ namespace AngelsManagement.Managers
 
         private bool CheckLoginPasswordMatch()
         {
-            return (Login.Equals(Password));
+            return usersManager.CanUserLogin(Login, Password);
         }
 
         public string GetValidationErrorString()
         {
             return String.Join("\n", ValidationErrorReason.ToArray());
         }
+        
     }
 }
