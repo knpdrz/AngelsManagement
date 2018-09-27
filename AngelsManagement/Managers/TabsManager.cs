@@ -138,10 +138,26 @@ namespace AngelsManagement.Managers
         private void VolunteerRow_RightClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            Volunteer doubleClickedVolunteer = (Volunteer)row.Item;
+            volunteerToBeRemoved = (Volunteer)row.Item;
 
-            //showing options for double-clicked volunteer
+            //showing options for right-clicked volunteer
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem item = new MenuItem
+            {
+                Header = "Delete"
+            };
 
+            item.Click += new RoutedEventHandler(DeleteVolunteer);
+
+            contextMenu.Items.Add(item);
+            contextMenu.IsOpen = true;
+        }
+
+        private Volunteer volunteerToBeRemoved;
+
+        private void DeleteVolunteer(object sender, RoutedEventArgs e)
+        {
+            dataManager.DeleteVolunteer(volunteerToBeRemoved);
         }
 
         private void InitializeStudentsTab()
@@ -171,13 +187,30 @@ namespace AngelsManagement.Managers
                 new StudentDetailsWindow(dataManager, doubleClickedStudent);
             studentDetailsWindow.Show();
         }
+
         private void StudentRow_RightClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            Student doubleClickedStudent = (Student)row.Item;
+            studentToBeRemoved = (Student)row.Item;
 
-            //showing options for double-clicked student
+            //showing options for right-clicked student
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem item = new MenuItem
+            {
+                Header = "Delete"
+            };
 
+            item.Click += new RoutedEventHandler(DeleteStudent);
+
+            contextMenu.Items.Add(item);
+            contextMenu.IsOpen = true;
+        }
+
+        private Student studentToBeRemoved;
+
+        private void DeleteStudent(object sender, RoutedEventArgs e)
+        {
+            dataManager.DeleteStudent(studentToBeRemoved);
         }
 
         private void InitializeGuardiansTab()
@@ -211,28 +244,26 @@ namespace AngelsManagement.Managers
         private void GuardianRow_RightClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            rightClickedGuardian = (Guardian)row.Item;
+            guardianToBeRemoved = (Guardian)row.Item;
 
-            //showing options for double-clicked guardian
+            //showing options for right-clicked guardian
             ContextMenu contextMenu = new ContextMenu();
             MenuItem item = new MenuItem
             {
                 Header = "Delete"
             };
-            item.Click += new RoutedEventHandler(DeleteGuardian);
-            contextMenu.Items.Add(item);
 
+            item.Click += new RoutedEventHandler(DeleteGuardian);
+
+            contextMenu.Items.Add(item);
             contextMenu.IsOpen = true;
-            
         }
 
-        private Guardian rightClickedGuardian;
+        private Guardian guardianToBeRemoved;
 
         private void DeleteGuardian(object sender, RoutedEventArgs e)
         {
-            //todo- get guardian data, delete guardian
-            Console.WriteLine("about to delete guardian " + rightClickedGuardian.FirstName);            
-            
+            dataManager.DeleteGuardian(guardianToBeRemoved);
         }
     }
 }

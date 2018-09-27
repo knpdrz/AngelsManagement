@@ -186,6 +186,18 @@ namespace AngelsManagement
             VolunteersDict[updatedVolunteer.City].Add(updatedVolunteer);
         }
 
+        public void DeleteVolunteer(Volunteer volunteer)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Volunteers.Remove(volunteer);
+                ctx.SaveChanges();
+            }
+
+            //remove volunteer from observable collection
+            VolunteersDict[volunteer.City].Remove(volunteer);
+        }
+
         public void AddStudent(Student student)
         {
             using (var ctx = new PeopleContext())
@@ -219,6 +231,19 @@ namespace AngelsManagement
             StudentsDict[updatedStudent.City].Add(updatedStudent);
         }
 
+        public void DeleteStudent(Student student)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Students.Remove(student);
+                ctx.SaveChanges();
+            }
+
+            //remove student from observable collection
+            StudentsDict[student.City].Remove(student);
+        }
+
+
         public void UpdateGuardian(string oldGuardianCity, Guardian updatedGuardian)
         {
             using (var ctx = new PeopleContext())
@@ -237,6 +262,18 @@ namespace AngelsManagement
 
             //add guardian to observable collection of their current city
             GuardiansDict[updatedGuardian.City].Add(updatedGuardian);
+        }
+
+        public void DeleteGuardian(Guardian guardian)
+        {
+            using (var ctx = new PeopleContext())
+            {
+                ctx.Guardians.Remove(guardian);
+                ctx.SaveChanges();
+            }
+
+            //remove guardian from observable collection
+            GuardiansDict[guardian.City].Remove(guardian);
         }
 
         //returns a list of students that volunteer from parameter has
