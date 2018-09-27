@@ -59,6 +59,10 @@ namespace AngelsManagement
         public static String AddressErrorText = "Błędny adres: ";
         public static String ErrorText = "Wprowadzono błędne dane";
 
+        public static String EmptyLoginErrorText = "Login nie może być pusty";
+        public static String EmptyPasswordErrorText = "Hasło nie może być puste";
+        public static String WrongLoginOrPasswordErrorText = "Błędny login lub hasło";
+
         public static Int64 MinPersonYear = 1900;
         //current year
         public static Int64 MaxPersonYear = Int64.Parse(DateTime.Now.Year.ToString());
