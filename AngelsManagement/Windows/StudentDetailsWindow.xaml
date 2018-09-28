@@ -53,7 +53,7 @@
 
             <Label Grid.Row="6">Rodzice</Label>
             <DataGrid x:Name="GuardiansDataGrid" Grid.Row="6" Grid.Column="1" 
-                      HorizontalAlignment="Center" Height="58" Margin="3,0,-159,52"  
+                      HorizontalAlignment="Center" Height="70" Margin="3,0,-159,52"  
                       VerticalAlignment="Bottom" Width="457"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"/>
