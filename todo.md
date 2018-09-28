@@ -2,8 +2,7 @@ Angels Management
 ==
 
 # Todo
-- [ ] Hasło na wejście aplikacji
-    - [ ] Możliwość zmiany hasła
+
 
 ## Monika
 - [x] Konstrukcja bazy
@@ -21,7 +20,9 @@ Angels Management
     - [x] wolontariuszy
     - [x] podopiecznych
     - [x] rodziców
-
+- [x] Hasło na wejście aplikacji
+    - [x] Możliwość zmiany hasła
+    
 ## Mikołaj
 - [ ] Dodawanie miast
 
