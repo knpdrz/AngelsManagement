@@ -120,6 +120,7 @@ namespace AngelsManagement.Windows
         private void UpdateStudent(Student updatedStudent)
         {
             dataManager.UpdateStudent(student.City, updatedStudent);
+            student = updatedStudent;
         }
     }
 }
