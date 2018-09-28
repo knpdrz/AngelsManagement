@@ -100,6 +100,12 @@ namespace AngelsManagement.Managers
             //add that tab item to tabControl 
             tabControl.Items.Add(tabItem);
 
+            //disable on right click option for non admin
+            if (!iAmAdminFlag)
+            {
+                rightClickMouseButtonHandler = null;
+            }
+
             //attach created datagrid to its city tab
             DataGrid dataGrid = CreateDataGrid(itemsSource,
                 columnNames, doubleClickMouseButtonEventHandler,
