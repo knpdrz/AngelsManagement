@@ -33,6 +33,23 @@ namespace AngelsManagement.Windows
             this.volunteer = volunteer;
 
             SetVolunteerData();
+            AdjustViewToAuthorization();
+        }
+        private void AdjustViewToAuthorization()
+        {
+            //enable editing student details for admin
+            if (iAmAdminFlag)
+            {
+                FirstNameTextBox.IsEnabled = true;
+                LastNameTextBox.IsEnabled = true;
+                BirthYearTextBox.IsEnabled = true;
+                EmailTextBox.IsEnabled = true;
+                AddressTextBox.IsEnabled = true;
+                CityComboBox.IsEnabled = true;
+
+                SaveChangesButton.Visibility = Visibility.Visible;
+                AddStudentButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void SetVolunteerData()
@@ -42,7 +59,7 @@ namespace AngelsManagement.Windows
             BirthYearTextBox.Text = volunteer.BirthYear.ToString();
             EmailTextBox.Text = volunteer.Email;
             AddressTextBox.Text = volunteer.Address;
-
+            
             //set city in combobox
             foreach(ComboBoxItem item in CityComboBox.Items)
             {
