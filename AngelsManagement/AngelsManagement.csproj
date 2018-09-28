@@ -180,9 +180,9 @@
       <DependentUpon>20180624180527_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PeopleContextModelSnapshot.cs" />
-    <Compile Include="Migrations\Users\20180927091817_InitialCreateUsers.cs" />
-    <Compile Include="Migrations\Users\20180927091817_InitialCreateUsers.designer.cs">
-      <DependentUpon>20180927091817_InitialCreateUsers.cs</DependentUpon>
+    <Compile Include="Migrations\Users\20180928070201_Users.cs" />
+    <Compile Include="Migrations\Users\20180928070201_Users.designer.cs">
+      <DependentUpon>20180928070201_Users.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Users\UsersContextModelSnapshot.cs" />
     <Compile Include="Model\PeopleContext.cs" />

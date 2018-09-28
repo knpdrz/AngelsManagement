@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngelsManagement.Migrations.Users
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20180927091817_InitialCreateUsers")]
-    partial class InitialCreateUsers
+    [Migration("20180928070201_Users")]
+    partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

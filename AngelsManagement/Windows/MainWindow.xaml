@@ -13,7 +13,7 @@
                     <MenuItem Header="Dodaj wolontariusza" Click="OnAddVolunteerButtonClick"/>
                     <MenuItem Header="Dodaj podopiecznego" Click="OnAddStudentButtonClick"/>
                 </MenuItem>
-                <MenuItem Header="Opcje administratora">
+                <MenuItem Name="AdminOptionsMenuItem" Header="Opcje administratora" Visibility="Hidden">
                     <MenuItem Header="Utwórz użytkownika" Click="OnCreateNewUserButtonClick"/>
                     <MenuItem Header="Zmień hasło użytkownika" Click="OnChangeUserPasswordButtonClick"/>
                 </MenuItem>

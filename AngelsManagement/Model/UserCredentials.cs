@@ -8,7 +8,6 @@ namespace AngelsManagement.Model
         public string Login { get; set; }
         public string Salt { get; set; }
         public string HashedPassword { get; set; }
-
         public UserCredentials() { }
         
         public UserCredentials(string login, string salt, string hashedPassword)

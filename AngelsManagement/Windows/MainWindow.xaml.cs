@@ -1,6 +1,8 @@
 ﻿using AngelsManagement.Managers;
 using AngelsManagement.Windows;
+using System;
 using System.Windows;
+using static AngelsManagement.Globals;
 
 namespace AngelsManagement
 {
@@ -16,8 +18,19 @@ namespace AngelsManagement
         {
             InitializeComponent();
             PrepareEverything();
+
+            ManageAdminSpecificContent();
         }
-        
+
+        private void ManageAdminSpecificContent()
+        {
+            //shows admin options if current user is an admin
+            if (iAmAdminFlag)
+            {
+                AdminOptionsMenuItem.Visibility = Visibility.Visible;
+            }
+        }
+
         private void PrepareEverything()
         {
             dataManager = new DataManager();

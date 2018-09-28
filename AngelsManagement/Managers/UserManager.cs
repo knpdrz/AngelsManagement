@@ -1,11 +1,7 @@
 ﻿using AngelsManagement.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AngelsManagement.Globals;
 
 namespace AngelsManagement.Managers
@@ -21,7 +17,6 @@ namespace AngelsManagement.Managers
             using (UsersContext context = new UsersContext())
             {
                 context.Database.Migrate();
-
             }
         }
 
@@ -105,5 +100,9 @@ namespace AngelsManagement.Managers
             return loginExists;
         }
 
+        public static bool IsUserAdmin(string login)
+        {
+            return (login.Equals(AdminUsername));
+        }
     }
 }

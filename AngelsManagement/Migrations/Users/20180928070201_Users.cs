@@ -2,7 +2,7 @@
 
 namespace AngelsManagement.Migrations.Users
 {
-    public partial class InitialCreateUsers : Migration
+    public partial class Users : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

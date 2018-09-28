@@ -15,7 +15,9 @@ namespace AngelsManagement.Managers
         private List<String> ValidationErrorReason = new List<string>();
 
         public UserCredentialsValidationManager(string login, string password)
-        {            
+        {
+            UserManager.PrepareDatabase();
+
             Login = login;
             Password = password;
 

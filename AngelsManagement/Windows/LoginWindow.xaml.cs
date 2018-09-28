@@ -29,7 +29,6 @@ namespace AngelsManagement.Windows
         {
             InitializeComponent();
             LoginTextBox.Focus();
-
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -38,6 +37,11 @@ namespace AngelsManagement.Windows
                 new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password);
             if (userCredentialsValidationManager.AreCredentialsValidOnLogin())
             {
+                if (UserManager.IsUserAdmin(LoginTextBox.Text))
+                {
+                    iAmAdminFlag = true;
+                }
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
 
@@ -46,7 +50,7 @@ namespace AngelsManagement.Windows
             else
             {
                 //show dialog with information which data were incorrect
-                MessageBoxResult result = System.Windows.MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
+                MessageBoxResult result = MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
                         ErrorText,
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
