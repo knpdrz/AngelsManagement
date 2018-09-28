@@ -52,6 +52,7 @@
                       HorizontalAlignment="Center" Height="123" Margin="3,0,-159,-13"  
                       VerticalAlignment="Bottom" Width="457"
                       IsReadOnly="True"
+                      AutoGenerateColumns="False"
                       />
 
         </Grid>

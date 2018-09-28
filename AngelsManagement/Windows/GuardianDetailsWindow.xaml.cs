@@ -65,8 +65,28 @@ namespace AngelsManagement.Windows
                     item.IsSelected = true;
                 }
             }
-
+            PrepareStudentsDataGrid();
             UpdateStudentsList();
+        }
+
+        private void AddColumnWithBinding(string header, string bindingName, DataGrid dataGrid)
+        {
+            var col = new DataGridTextColumn();
+            col.Header = header;
+            col.Binding = new Binding(bindingName);
+            dataGrid.Columns.Add(col);
+        }
+
+        private void PrepareStudentsDataGrid()
+        {
+            //selecting columns we want to see in the datagrid
+            //and giving them names taken from columnNames dictionary
+            //entries in the dictionary are in form 
+            //<column name to be displayed, column name in the db>
+            foreach (var columnName in StudentsColumnNamesBindings)
+            {
+                AddColumnWithBinding(columnName.Key, columnName.Value, StudentsDataGrid);
+            }
         }
 
         public void UpdateStudentsList()
