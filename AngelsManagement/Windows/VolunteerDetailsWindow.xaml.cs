@@ -105,6 +105,7 @@ namespace AngelsManagement.Windows
         private void UpdateVolunteer(Volunteer updatedVolunteer)
         {
             dataManager.UpdateVolunteer(volunteer.City, updatedVolunteer);
+            volunteer = updatedVolunteer;
         }
     }
 }

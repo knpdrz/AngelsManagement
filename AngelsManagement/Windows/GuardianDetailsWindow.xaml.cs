@@ -89,6 +89,7 @@ namespace AngelsManagement.Windows
         private void UpdateGuardian(Guardian updatedGuardian)
         {
             dataManager.UpdateGuardian(guardian.City, updatedGuardian);
+            guardian = updatedGuardian;
         }
     }
 }
