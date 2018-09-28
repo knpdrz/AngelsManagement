@@ -28,6 +28,7 @@ namespace AngelsManagement
             if (iAmAdminFlag)
             {
                 AdminOptionsMenuItem.Visibility = Visibility.Visible;
+                AddPersonMenuItem.Visibility = Visibility.Visible;
             }
         }
 

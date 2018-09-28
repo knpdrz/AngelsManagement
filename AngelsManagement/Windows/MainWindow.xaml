@@ -8,7 +8,7 @@
         Title="Anioły Wiedzy - Osoby" Height="732.393" Width="924.944">
     <Grid>
         <DockPanel>
-            <Menu DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top" Name="AddPersonMenuItem" Visibility="Hidden">
                 <MenuItem Header="Dodaj osobę">
                     <MenuItem Header="Dodaj wolontariusza" Click="OnAddVolunteerButtonClick"/>
                     <MenuItem Header="Dodaj podopiecznego" Click="OnAddStudentButtonClick"/>
