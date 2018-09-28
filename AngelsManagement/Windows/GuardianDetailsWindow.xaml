@@ -23,16 +23,16 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0">Imię</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox" IsEnabled="False"/>
             <Label Grid.Row="1">Nazwisko</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox" IsEnabled="False"/>
 
             <Label Grid.Row="2">Numer telefonu</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="PhoneTextBox"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="PhoneTextBox" IsEnabled="False"/>
             
             <Label Grid.Row="3">Miasto</Label>
             <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" 
-                      Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5">
+                      Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5" IsEnabled="False">
                 <ComboBoxItem IsSelected="True">
                     Gdansk
                 </ComboBoxItem>
@@ -44,13 +44,15 @@
                 Content="Zapisz zmiany" 
                 Grid.Row="4" Grid.Column="1" 
                 HorizontalAlignment="Center" Margin="0,5,0,10" 
-                VerticalAlignment="Bottom" Width="Auto" Click="SaveChangesButton_Click"/>
+                VerticalAlignment="Bottom" Width="Auto" Click="SaveChangesButton_Click"
+                    Visibility="Hidden"/>
 
             <Label Grid.Row="5">Podopieczni</Label>
             <DataGrid x:Name="StudentsDataGrid" Grid.Row="5" Grid.Column="1" 
                       HorizontalAlignment="Center" Height="123" Margin="3,0,-159,-13"  
                       VerticalAlignment="Bottom" Width="457"
-                      IsReadOnly="True"/>
+                      IsReadOnly="True"
+                      />
 
         </Grid>
         
