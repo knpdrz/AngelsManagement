@@ -33,6 +33,23 @@ namespace AngelsManagement.Windows
             this.student = student;
 
             SetStudentData();
+            AdjustViewToAuthorization();
+        }
+
+        private void AdjustViewToAuthorization()
+        {
+            //enable editing student details for admin
+            if (iAmAdminFlag)
+            {
+                FirstNameTextBox.IsEnabled = true;
+                LastNameTextBox.IsEnabled = true;
+                BirthYearTextBox.IsEnabled = true;
+                SchoolTextBox.IsEnabled = true;
+                CityComboBox.IsEnabled = true;
+
+                SaveChangesButton.Visibility = Visibility.Visible;
+                AddGuardianButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void SetStudentData()

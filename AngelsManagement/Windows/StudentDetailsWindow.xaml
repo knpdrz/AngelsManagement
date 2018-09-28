@@ -25,17 +25,17 @@
 
 
             <Label Grid.Row="0">Imię</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="FirstNameTextBox" IsEnabled="False"/>
             <Label Grid.Row="1">Nazwisko</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="LastNameTextBox" IsEnabled="False"/>
 
             <Label Grid.Row="2">Rok urodzenia</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="BirthYearTextBox"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,10" x:Name="BirthYearTextBox" IsEnabled="False"/>
             <Label Grid.Row="3">Szkoła</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,0,10" x:Name="SchoolTextBox"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,0,10" x:Name="SchoolTextBox" IsEnabled="False"/>
             <Label Grid.Row="4">Miasto</Label>
             <ComboBox x:Name="CityComboBox" Grid.Row="4" Grid.Column="1" 
-                      Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5">
+                      Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5" IsEnabled="False">
                 <ComboBoxItem IsSelected="True">
                     Gdansk
                 </ComboBoxItem>
@@ -47,7 +47,8 @@
                 Content="Zapisz zmiany" 
                 Grid.Row="5" Grid.Column="1" 
                 HorizontalAlignment="Center" Margin="0,10,0,10" 
-                VerticalAlignment="Bottom" Width="Auto" Click="SaveChangesButton_Click" />
+                VerticalAlignment="Bottom" Width="Auto" Click="SaveChangesButton_Click"
+                    Visibility="Hidden"/>
 
 
             <Label Grid.Row="6">Rodzice</Label>
@@ -60,7 +61,8 @@
         <Button x:Name="AddGuardianButton" 
                 Content="Dodaj rodzica" 
                 HorizontalAlignment="Center" Margin="0,0,0,5" 
-                VerticalAlignment="Bottom" Width="Auto" Click="AddGuardianButton_Click"/>
+                VerticalAlignment="Bottom" Width="Auto" Click="AddGuardianButton_Click"
+                 Visibility="Hidden"/>
 
 
     </Grid>
