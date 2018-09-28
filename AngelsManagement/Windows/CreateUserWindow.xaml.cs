@@ -34,9 +34,9 @@ namespace AngelsManagement.Windows
         private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
             UserCredentialsValidationManager userCredentialsValidationManager =
-                new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password, true);
+                new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password);
 
-            if (userCredentialsValidationManager.ValidationOk)
+            if (userCredentialsValidationManager.AreCredentialsValidOnSignUp())
             {
                 //create new user
                 UserManager.CreateUser(LoginTextBox.Text, PasswordBox.Password);

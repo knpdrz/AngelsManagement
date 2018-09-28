@@ -12,7 +12,6 @@ namespace AngelsManagement.Managers
 {
     public static class UserManager
     {
-
         public static void PrepareDatabase()
         {
             //create app data directory (do nothing if it already exists)
@@ -42,6 +41,24 @@ namespace AngelsManagement.Managers
             using (var ctx = new UsersContext())
             {
                 ctx.UserCredentials.Add(userCredentials);
+                ctx.SaveChanges();
+            }
+        }
+
+        public static void ChangeUserPassword(string login, string newPassword)
+        {
+            string newSalt = BCrypt.Net.BCrypt.GenerateSalt();
+            //hashing password with appended salt
+            string newHashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword + newSalt);
+
+            using (var ctx = new UsersContext())
+            {
+                UserCredentials newUserCredentials = 
+                    ctx.UserCredentials.SingleOrDefault(uc => uc.Login.Equals(login));
+                newUserCredentials.Salt = newSalt;
+                newUserCredentials.HashedPassword = newHashedPassword;
+
+                ctx.UserCredentials.Update(newUserCredentials);
                 ctx.SaveChanges();
             }
         }

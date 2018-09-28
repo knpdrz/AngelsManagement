@@ -21,37 +21,41 @@ using static AngelsManagement.Globals;
 namespace AngelsManagement.Windows
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for ChangePasswordWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class ChangePasswordWindow : Window
     {
-        public LoginWindow()
+        public ChangePasswordWindow()
         {
             InitializeComponent();
             LoginTextBox.Focus();
-
         }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            UserCredentialsValidationManager userCredentialsValidationManager = 
+            UserCredentialsValidationManager userCredentialsValidationManager =
                 new UserCredentialsValidationManager(LoginTextBox.Text, PasswordBox.Password);
-            if (userCredentialsValidationManager.AreCredentialsValidOnLogin())
-            {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
 
+            if (userCredentialsValidationManager.AreCredentialsValidOnPasswordChange())
+            {
+                //change password for user with given login
+                UserManager.ChangeUserPassword(LoginTextBox.Text, PasswordBox.Password);
+
+                //show dialog with success info
+                MessageBoxResult result = MessageBox.Show(UserPasswordSuccessfullyUpdatedText,
+                        SuccessText,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                 Close();
             }
             else
             {
                 //show dialog with information which data were incorrect
-                MessageBoxResult result = System.Windows.MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
+                MessageBoxResult result = MessageBox.Show(userCredentialsValidationManager.GetValidationErrorString(),
                         ErrorText,
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
             }
-
         }
     }
 }

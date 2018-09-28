@@ -41,5 +41,11 @@ namespace AngelsManagement
             CreateUserWindow createUserWindow = new CreateUserWindow();
             createUserWindow.Show();
         }
+
+        private void OnChangeUserPasswordButtonClick(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.Show();
+        }
     }
 }

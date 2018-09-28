@@ -59,13 +59,15 @@ namespace AngelsManagement
         public static String AddressErrorText = "Błędny adres: ";
         public static String ErrorText = "Wprowadzono błędne dane";
 
-        public static String EmptyLoginErrorText = "Login nie może być pusty";
-        public static String EmptyPasswordErrorText = "Hasło nie może być puste";
+        public static String WrongLoginErrorText = "Nieprawidłowy login";
+        public static String WrongPasswordErrorText = "Nieprawidłowe hasło";
         public static String WrongLoginOrPasswordErrorText = "Błędny login lub hasło";
         public static String UserAlreadyExistsErrorText = "Użytkownik o podanym loginie już istnieje";
+        public static String UserDoesNotExistsErrorText = "Użytkownik o podanym loginie nie istnieje";
 
         public static String SuccessText = "Sukces";
         public static String UserSuccessfullyCreatedText = "Użytkownik utworzony!";
+        public static String UserPasswordSuccessfullyUpdatedText = "Zmieniono hasło użytkownika ";
 
         public static Int64 MinPersonYear = 1900;
         //current year

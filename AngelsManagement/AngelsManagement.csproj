@@ -172,7 +172,7 @@
     </ApplicationDefinition>
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\TabsManager.cs" />
-    <Compile Include="Managers\LoginManager.cs" />
+    <Compile Include="Managers\UserCredentialsValidationManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\ValidationManager.cs" />
     <Compile Include="Migrations\20180624180527_initial.cs" />
@@ -195,6 +195,9 @@
     </Compile>
     <Compile Include="Windows\AddStudentToVWindow.xaml.cs">
       <DependentUpon>AddStudentToVWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\CreateUserWindow.xaml.cs">
       <DependentUpon>CreateUserWindow.xaml</DependentUpon>
@@ -226,6 +229,10 @@
     <Page Include="Windows\AddVolunteerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChangePasswordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\CreateUserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
