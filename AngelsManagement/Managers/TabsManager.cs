@@ -150,7 +150,7 @@ namespace AngelsManagement.Managers
             ContextMenu contextMenu = new ContextMenu();
             MenuItem item = new MenuItem
             {
-                Header = "Delete"
+                Header = DeleteString
             };
 
             item.Click += new RoutedEventHandler(DeleteVolunteer);
@@ -203,7 +203,7 @@ namespace AngelsManagement.Managers
             ContextMenu contextMenu = new ContextMenu();
             MenuItem item = new MenuItem
             {
-                Header = "Delete"
+                Header = DeleteString
             };
 
             item.Click += new RoutedEventHandler(DeleteStudent);
@@ -256,7 +256,7 @@ namespace AngelsManagement.Managers
             ContextMenu contextMenu = new ContextMenu();
             MenuItem item = new MenuItem
             {
-                Header = "Delete"
+                Header = DeleteString
             };
 
             item.Click += new RoutedEventHandler(DeleteGuardian);

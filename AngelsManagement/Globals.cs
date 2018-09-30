@@ -50,6 +50,8 @@ namespace AngelsManagement
             { "Numer telefonu", "PhoneNumber" }
         };
 
+        public static String DeleteString = "Usuń";
+
         public static String FirstNameErrorText = "Błędne imię: ";
         public static String LastNameErrorText = "Błędne nazwisko: ";
         public static String YearErrorText = "Błędny rok urodzenia: ";
