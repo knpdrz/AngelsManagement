@@ -1,24 +1,24 @@
 Angels Management Readme
 ==
-Gdy program jest u¿ywany po raz pierwszy, mo¿na zalogowaæ siê do niego za pomoc¹ loginu: admin, has³a: admin.
+Gdy program jest uÅ¼ywany po raz pierwszy, moÅ¼na zalogowaÄ‡ siÄ™ do niego za pomocÄ… loginu: admin, hasÅ‚a: admin.
 
 #### Typy kont
-S¹ dwa typy kont w programie: admin i zwyk³y u¿ytkownik.
-###### Admin mo¿e
-- tworzyæ zwyk³ych u¿ytkowników
-- zmieniaæ im has³a (i swoje has³o)
-- tworzyæ wolontariuszy, podopiecznych i opiekunów podopiecznych
-- zmieniaæ dane wolontariuszy, podopiecznych i opiekunów podopiecznych
-- dodawaæ podopiecznych do wolontariuszy i opiekunów podopiecznym
-- usuwaæ wolontariuszy, podopiecznych i opiekunów podopiecznych
+SÄ… dwa typy kont w programie: admin i zwykÅ‚y uÅ¼ytkownik.
+###### Admin moÅ¼e
+- tworzyÄ‡ zwykÅ‚ych uÅ¼ytkownikÃ³w
+- zmieniaÄ‡ im hasÅ‚a (i swoje hasÅ‚o)
+- tworzyÄ‡ wolontariuszy, podopiecznych i opiekunÃ³w podopiecznych
+- zmieniaÄ‡ dane wolontariuszy, podopiecznych i opiekunÃ³w podopiecznych
+- dodawaÄ‡ podopiecznych do wolontariuszy i opiekunÃ³w podopiecznym
+- usuwaÄ‡ wolontariuszy, podopiecznych i opiekunÃ³w podopiecznych
 
-###### Zwyk³y u¿ytkownik mo¿e
-- przegl¹daæ dane wolontariuszy, podopiecznych i opiekunów podopiecznych
+###### ZwykÅ‚y uÅ¼ytkownik moÅ¼e
+- przeglÄ…daÄ‡ dane wolontariuszy, podopiecznych i opiekunÃ³w podopiecznych
 
-###### Jak u¿ywaæ nieoczywistych funkcji programu
-1. Aby zobaczyæ szczegó³owe dane osoby lub zmieniæ jej dane- kliknij dwa razy wiersz w tabeli z danymi tej osoby
-2. Aby usun¹æ osobê- kliknij prawym przyciskiem wiersz z danymi osoby i wybierz 'Usuñ'
-3. Aby stworzyæ opiekuna- otwórz szczegó³owe dane podopiecznego, któremu chcesz dodaæ opiekuna i kliknij przycisk 'Dodaj opiekuna'
+###### Jak uÅ¼ywaÄ‡ nieoczywistych funkcji programu
+1. Aby zobaczyÄ‡ szczegÃ³Å‚owe dane osoby lub zmieniÄ‡ jej dane- kliknij dwa razy wiersz w tabeli z danymi tej osoby
+2. Aby usunÄ…Ä‡ osobÄ™- kliknij prawym przyciskiem wiersz z danymi osoby i wybierz 'UsuÅ„'
+3. Aby stworzyÄ‡ opiekuna- otwÃ³rz szczegÃ³Å‚owe dane podopiecznego, ktÃ³remu chcesz dodaÄ‡ opiekuna i kliknij przycisk 'Dodaj opiekuna'
 
 ==
 When program is used for the first time user can log in with account login: admin, password: admin.
@@ -39,6 +39,6 @@ There are two account types in the program: admin and normal user.
 
 ###### How to use (the not obvious parts)
 1. To view details of a person (volunteer/ student/ guardian)- double click row of the table with that persons' name
-2. To delete a person- right click the person and select 'Usuñ' (Delete)
+2. To delete a person- right click the person and select 'UsuÅ„' (Delete)
 3. To create a guardian- view details of a student you want to add guardian to, select 'Dodaj opiekuna' (Add guardian)
 
