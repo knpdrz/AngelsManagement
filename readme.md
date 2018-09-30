@@ -20,6 +20,7 @@ Są dwa typy kont w programie: admin i zwykły użytkownik.
 2. Aby usunąć osobę- kliknij prawym przyciskiem wiersz z danymi osoby i wybierz 'Usuń'
 3. Aby stworzyć opiekuna- otwórz szczegółowe dane podopiecznego, któremu chcesz dodać opiekuna i kliknij przycisk 'Dodaj opiekuna'
 
+English version
 ==
 When program is used for the first time user can log in with account login: admin, password: admin.
 
@@ -37,7 +38,7 @@ There are two account types in the program: admin and normal user.
 - view volunteer, student and guardians data
 
 
-###### How to use (the not obvious parts)
+###### How to use (the not so obvious parts)
 1. To view details of a person (volunteer/ student/ guardian)- double click row of the table with that persons' name
 2. To delete a person- right click the person and select 'Usuń' (Delete)
 3. To create a guardian- view details of a student you want to add guardian to, select 'Dodaj opiekuna' (Add guardian)
