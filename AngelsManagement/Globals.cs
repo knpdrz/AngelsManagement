@@ -74,6 +74,7 @@ namespace AngelsManagement
         public static Int64 MaxPersonYear = Int64.Parse(DateTime.Now.Year.ToString());
 
         public static string AdminUsername = "admin";
+        public static string AdminDefaultPassword = "admin";
 
         public static bool iAmAdminFlag = false;
     }

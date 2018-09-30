@@ -28,7 +28,13 @@ namespace AngelsManagement.Windows
         public LoginWindow()
         {
             InitializeComponent();
+
+            UserManager.PrepareDatabase();
+            UserManager.EnsureAdminExists();
+
             LoginTextBox.Focus();
+
+            Console.WriteLine("path " + appDataFolderPath);
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

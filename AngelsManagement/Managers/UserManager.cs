@@ -8,6 +8,14 @@ namespace AngelsManagement.Managers
 {
     public static class UserManager
     {
+        public static void EnsureAdminExists()
+        {
+            //if admins' account doesn't exist- create it with default password
+            if (!LoginExistsInDb(AdminUsername)){
+                CreateUser(AdminUsername, AdminDefaultPassword);
+            }
+        }
+
         public static void PrepareDatabase()
         {
             //create app data directory (do nothing if it already exists)
