@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement"
         mc:Ignorable="d"
-        Title="Dodaj podopiecznego" Height="288.878" Width="451.059">
+        Title="Dodaj podopiecznego" Height="288.878" Width="451.059" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Margin="20,20,0,65">
             <Grid.ColumnDefinitions>
@@ -34,10 +34,10 @@
             <Label Grid.Row="4">Miasto</Label>
             <ComboBox x:Name="CityComboBox" Grid.Row="4" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
                 <ComboBoxItem IsSelected="True">
-                    Gdansk
+                    Gdańsk
                 </ComboBoxItem>
-                <ComboBoxItem>Wroclaw</ComboBoxItem>
-                <ComboBoxItem>Poznan</ComboBoxItem>
+                <ComboBoxItem>Wrocław</ComboBoxItem>
+                <ComboBoxItem>Poznań</ComboBoxItem>
             </ComboBox>
             
         </Grid>

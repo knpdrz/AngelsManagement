@@ -5,32 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement.Windows"
         mc:Ignorable="d"
-        Title="Zaloguj się" Height="150" Width="300">
+        Title="Zaloguj się" Height="150" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Margin="10,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="179.494" />
+                <ColumnDefinition Width="21.506"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                
+
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0">Login</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="LoginTextBox"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,0,10" x:Name="LoginTextBox" Grid.ColumnSpan="2"/>
             <Label Grid.Row="1">Hasło</Label>
-            <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="PasswordBox" />
+            <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5,5,0,10" x:Name="PasswordBox" Grid.ColumnSpan="2" />
 
             <Button x:Name="LoginButton" 
                 Content="Zaloguj się" 
-                Grid.Row="4" Grid.Column="1" 
-                HorizontalAlignment="Center" Margin="0,5,0,10" 
-                VerticalAlignment="Bottom" Width="Auto" Click="LoginButton_Click"/>
+                Grid.Row="2" Grid.Column="1" 
+                HorizontalAlignment="Center" Margin="70,0,48.494,10" 
+                VerticalAlignment="Bottom" Width="Auto" Click="LoginButton_Click" IsDefault="True"/>
 
-            
+
 
         </Grid>
 

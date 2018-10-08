@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement"
         mc:Ignorable="d"
-        Title="Dodaj wolontariusza" Height="391.791" Width="516.959">
+        Title="Dodaj wolontariusza" Height="391.791" Width="516.959" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Margin="20,20,0,96">
             <Grid.ColumnDefinitions>
@@ -36,10 +36,10 @@
             <Label Grid.Row="5">Miasto</Label>
             <ComboBox x:Name="CityComboBox" Grid.Row="5" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
                 <ComboBoxItem IsSelected="True">
-                    Gdansk
+                    Gdańsk
                 </ComboBoxItem>
-                <ComboBoxItem>Wroclaw</ComboBoxItem>
-                <ComboBoxItem>Poznan</ComboBoxItem>
+                <ComboBoxItem>Wrocław</ComboBoxItem>
+                <ComboBoxItem>Poznań</ComboBoxItem>
             </ComboBox>
         </Grid>
         <Button x:Name="AddVolunteerButton" Content="Dodaj wolontariusza" 

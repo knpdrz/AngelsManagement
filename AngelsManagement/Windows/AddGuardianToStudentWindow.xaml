@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement.Windows"
         mc:Ignorable="d"
-        Title="Dodaj rodzica" Height="264.408" Width="460.073">
+        Title="Dodaj rodzica" Height="264.408" Width="460.073" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid Margin="20,34,0,60">
@@ -32,10 +32,10 @@
             <Label Grid.Row="3">Miasto</Label>
             <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,0">
                 <ComboBoxItem IsSelected="True">
-                    Gdansk
+                    Gdańsk
                 </ComboBoxItem>
-                <ComboBoxItem>Wroclaw</ComboBoxItem>
-                <ComboBoxItem>Poznan</ComboBoxItem>
+                <ComboBoxItem>Wrocław</ComboBoxItem>
+                <ComboBoxItem>Poznań</ComboBoxItem>
             </ComboBox>
 
         </Grid>

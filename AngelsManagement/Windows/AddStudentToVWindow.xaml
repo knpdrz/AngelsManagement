@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement.Windows"
         mc:Ignorable="d"
-        Title="Wybierz podopiecznych wolontariusza" Height="533.898" Width="623.983">
+        Title="Wybierz podopiecznych wolontariusza" Height="533.898" Width="623.983" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock x:Name="InfoTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" 
                    TextWrapping="Wrap" Text="Wybierz podopiecznych dla wolontariusza: " VerticalAlignment="Top"/>

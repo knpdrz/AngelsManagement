@@ -15,7 +15,7 @@ namespace AngelsManagement
         public static string dbFilePath = appDataFolderPath + "\\" + dbFileName;
         public static string connectionString = "Data source=" + dbFilePath;
 
-        public static String[] Cities = { "Gdansk", "Wroclaw", "Poznan" };
+        public static String[] Cities = { "Gdańsk", "Wrocław", "Poznań" };
 
         public static Dictionary<String, String> VolunteersColumnNamesBindings = 
             new Dictionary<string, string>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AngelsManagement"
         mc:Ignorable="d"
-        Title="Szczegóły o opiekunie" Height="380" Width="638.403">
+        Title="Szczegóły o opiekunie" Height="380" Width="638.403" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Margin="20,20,0,0">
             <Grid.ColumnDefinitions>
@@ -34,10 +34,10 @@
             <ComboBox x:Name="CityComboBox" Grid.Row="3" Grid.Column="1" 
                       Width="100" Height="25" HorizontalAlignment="Left" Margin="5,5,0,5" IsEnabled="False">
                 <ComboBoxItem IsSelected="True">
-                    Gdansk
+                    Gdańsk
                 </ComboBoxItem>
-                <ComboBoxItem>Wroclaw</ComboBoxItem>
-                <ComboBoxItem>Poznan</ComboBoxItem>
+                <ComboBoxItem>Wrocław</ComboBoxItem>
+                <ComboBoxItem>Poznań</ComboBoxItem>
             </ComboBox>
 
             <Button x:Name="SaveChangesButton" 
