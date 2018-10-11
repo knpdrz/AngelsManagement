@@ -18,7 +18,7 @@ Są dwa typy kont w programie: admin i zwykły użytkownik.
 ###### Jak używać nieoczywistych funkcji programu
 1. Aby zobaczyć szczegółowe dane osoby lub zmienić jej dane- kliknij dwa razy wiersz w tabeli z danymi tej osoby
 2. Aby usunąć osobę- kliknij prawym przyciskiem wiersz z danymi osoby i wybierz 'Usuń'
-3. Aby stworzyć opiekuna- otwórz szczegółowe dane podopiecznego, któremu chcesz dodać opiekuna i kliknij przycisk 'Dodaj opiekuna'
+3. Aby stworzyć opiekuna/rodzica - otwórz szczegółowe dane podopiecznego, któremu chcesz dodać opiekuna i kliknij przycisk 'Dodaj rodzica'
 
 English version
 ==
